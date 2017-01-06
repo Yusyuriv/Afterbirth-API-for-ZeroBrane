@@ -1,7 +1,7 @@
 return {
   RegisterMod = {
     type = "function",
-    arguments = "(string modName, integer apiVersion)",
+    args = "(string modName, integer apiVersion)",
     returns = "(Mod)",
     valuetype = "_Mod"
   },
@@ -39,282 +39,248 @@ return {
   },
   Isaac = {
     type = "lib",
-    description = "namespace",
     childs = {
       DebugString = {
         type = "function",
-        description = "Writes a string into the log file.",
         args = "(string str)",
         returns = "()"
       },
       GetPlayer = {
         type = "function",
-        description = "Returns the player.",
-        args = "(int playerId)",
+        args = "(integer playerId)",
         returns = "(EntityPlayer)",
         valuetype = "EntityPlayer"
       },
       GetFrameCount = {
         type = "function",
-        description = "Returns frame count.",
         args = "()",
         returns = "(integer)",
-        valuetype = "integer"
+        valuetype = "number"
       },
       Spawn = {
         type = "function",
-        description = "Spawns an entity.",
         args = "(int entityType, int entityVariant, int entitySubtype, Vector position, Vector velocity, Entity spawner)",
         returns = "(Entity)",
         valuetype = "Entity"
       },
       GridSpawn = {
         type = "function",
-        description = "Spawn a grid entity.",
         args = "(int gridEntityType, int variant, Vector position, boolean forced)",
         returns = "(GridEntity)",
-        valuetype = "Entity"
+        valuetype = "GridEntity"
       },
       RenderText = {
         type = "function",
-        description = "Renders text at the specified coordinates with the specified color.",
         args = "(string str, float x, float y, float r, float g, float b, float a)",
         returns = "()"
       },
-      ToPickup = {
-        type = "function",
-
-        args = "(Entity entity)",
-        returns = "(EntityPickup)",
-        valuetype = "EntityPickup"
-      },
-      ToEffect = {
-        type = "function",
-
-        args = "(Entity entity)",
-        valuetype = "EntityEffect"
-      },
       GetRandomPosition = {
         type = "function",
-
         args = "()",
         returns = "(Vector)",
         valuetype = "Vector"
       },
       GetFreeNearPosition = {
         type = "function",
-
         args = "(Vector pos, float step)",
         returns = "(Vector)",
         valuetype = "Vector"
       },
       Explode = {
         type = "function",
-
         args = "(Vector pos, Entity source, float damage)",
         returns = "()"
       },
       AddPillEffectToPoll = {
         type = "function",
-
         args = "(integer pillEffect)",
         returns = "(integer)",
         valuetype = "number"
       },
       GetRoomEntities = {
         type = "function",
-        description = "Get all entities in the room.",
+        description = "returns all entities in the room",
         args = "()",
         returns = "(table)",
         valuetype = "table"
       },
       GetChallenge = {
         type = "function",
-
         args = "()",
         returns = "(integer)",
         valuetype = "number"
       },
       GetEntityTypeByName = {
         type = "function",
-
         args = "(string entityName)",
         returns = "(integer)",
         valuetype = "number"
       },
       GetEntityVariantByName = {
         type = "function",
-
         args = "(string entityName)",
         returns = "(integer)",
         valuetype = "number"
       },
       GetItemIdByName = {
         type = "function",
-
         args = "(string itemName)",
         returns = "(integer)",
         valuetype = "number"
       },
       GetPlayerTypeByName = {
         type = "function",
-
         args = "(string playerName)",
         returns = "(integer)",
         valuetype = "number"
       },
       GetCardIdByName = {
         type = "function",
-
         args = "(string cardName)",
         returns = "(integer)",
         valuetype = "number"
       },
       GetPillEffectByName = {
         type = "function",
-
         args = "(string pillEffect)",
         returns = "(integer)",
         valuetype = "number"
       },
       GetTrinketIdByName = {
         type = "function",
-
         args = "(string trinketName)",
         returns = "(integer)",
         valuetype = "number"
       },
       GetChallengeIdByName = {
         type = "function",
-
         args = "(string challengeName)",
         returns = "(integer)",
         valuetype = "number"
       },
       GetCostumeIdByPath = {
         type = "function",
-
         args = "(string path)",
         returns = "(integer)",
         valuetype = "number"
       },
       RegisterMod = {
         type = "function",
-
         args = "(table ref, string modName, integer apiVersion)",
         returns = "()"
       },
       AddCallback = {
         type = "function",
-
-        args = "(table ref, integer callbackId, table callbackFn, integer entityId = -1)",
+        args = "(table ref, integer callbackId, table callbackFn, integer entityId)",
         returns = "()"
       },
       SaveModData = {
         type = "function",
-
         args = "(table ref, string data)",
         returns = "()"
       },
       LoadModData = {
         type = "function",
-
         args = "(table ref)",
         returns = "(string)",
         valuetype = "string"
       },
       HasModData = {
         type = "function",
-
         args = "(table ref)",
         returns = "(boolean)",
         valuetype = "boolean"
       },
       RemoveModData = {
         type = "function",
-
         args = "(table ref)",
         returns = "()"
+      },
+      WorldToScreenDistance = {
+        type = "function",
+        args = "(Vector distance)",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      WorldToScreenPosition = {
+        type = "function",
+        args = "(Vector position, boolean toRound)",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      ScreenToWorldDistance = {
+        type = "function",
+        description = "reverse operation, converts render distance to in-game distance",
+        args = "(Vector renderDistance)",
+        returns = "(Vector)",
+        valuetype = "Vector"
       }
     }
   },
   Color = {
-    type="function",
-    args = "(float r, float g, float b, float a, integer rOffset, integer gOffset, integer bOffset)",
+    type = "function",
+    args = "(float red, float green, float blue, float alpha, integer redOffset, integer greenOffset, integer blueOffset)",
     returns = "(Color)",
     valuetype = "Color",
     childs = {
       Reset = {
         type = "method",
-
         args = "()",
         returns = "()"
       },
       SetTint = {
         type = "method",
-
         args = "(float redTint, float greenTint, float blueTint, float alphaTint)",
         returns = "()"
       },
       SetColorize = {
         type = "method",
-
         args = "(float red, float green, float blue, float amount)",
         returns = "()"
       },
       SetOffset = {
         type = "method",
-
         args = "(float redOffset, float greenOffset, float blueOffset)",
         returns = "()"
       },
       Lerp = {
         type = "method",
-
         args = "(Color m1, Color m2, float t)",
         returns = "(Color)",
         valuetype = "Color"
       },
       __mul = {
         type = "method",
-
         args = "(Color right)",
         returns = "(Color)",
         valuetype = "Color"
       },
       R = {
         type = "value",
-
         valuetype = "number"
       },
       G = {
         type = "value",
-
         valuetype = "number"
       },
       B = {
         type = "value",
-
         valuetype = "number"
       },
       A = {
         type = "value",
-
         valuetype = "number"
       },
       RO = {
         type = "value",
-
         valuetype = "number"
       },
       GO = {
         type = "value",
-
         valuetype = "number"
       },
       BO = {
         type = "value",
-
         valuetype = "number"
       }
     }
@@ -363,6 +329,7 @@ return {
       },
       Kill = {
         type = "method",
+        description = "Kills the entity and makes a blood splat or gibs.",
         args = "()",
         returns = "()"
       },
@@ -378,6 +345,7 @@ return {
       },
       BloodExplode = {
         type = "method",
+        description = "Explodes with gibs and blood.",
         args = "()",
         returns = "()"
       },
@@ -425,18 +393,21 @@ return {
       },
       IsEnemy = {
         type = "method",
+        description = "return true for NPCs that are not controlled by the player",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
       },
       IsActiveEnemy = {
         type = "method",
+        description = "return true for non background NPCs (ex: every enemy except fire and shopkeepers)",
         args = "(boolean includeDead)",
         returns = "(boolean)",
         valuetype = "boolean"
       },
       IsVulnerableEnemy = {
         type = "method",
+        description = "return true for enemies that can be damaged",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -465,7 +436,7 @@ return {
       },
       HasEntityFlags = {
         type = "method",
-        args = "()",
+        args = "(integer flags)",
         returns = "(boolean)",
         valuetype = "boolean"
       },
@@ -492,6 +463,7 @@ return {
       },
       AddSlowing = {
         type = "method",
+        description = "Makes the friction higher.",
         args = "(EntityRef source, integer duration, float slowValue, Color slowColor)",
         returns = "()"
       },
@@ -556,17 +528,19 @@ return {
       },
       CanShutDoors = {
         type = "method",
+        description = "enemies keep the doors shut",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
       },
       IsBoss = {
         type = "method",
+        description = "bosses display health bar",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
       },
-      GetBossId = {
+      GetBossID = {
         type = "method",
         args = "()",
         returns = "(BossId)",
@@ -592,6 +566,7 @@ return {
       },
       IsFrame = {
         type = "method",
+        description = "true every X frames",
         args = "(integer frame, integer offset)",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -638,8 +613,27 @@ return {
         returns = "(EntityFamiliar)",
         valuetype = "EntityFamiliar"
       },
+      ToBomb = {
+        type = "method",
+        args = "()",
+        returns = "(EntityBomb)",
+        valuetype = "EntityBomb"
+      },
+      ToKnife = {
+        type = "method",
+        args = "()",
+        returns = "(EntityKnife)",
+        valuetype = "EntityKnife"
+      },
+      ToLaser = {
+        type = "method",
+        args = "()",
+        returns = "(EntityLaser)",
+        valuetype = "EntityLaser"
+      },
       Friction = {
         type = "value",
+        description = "loaded from entity config",
         valuetype = "number"
       },
       Position = {
@@ -811,7 +805,6 @@ return {
       }
     }
   },
-
   EntityEffect = {
     type = "class",
     inherits = "Entity",
@@ -833,6 +826,7 @@ return {
       },
       SetRadii = {
         type = "method",
+        description = "For shockwaves.",
         args = "(float min, float max)",
         returns = "()"
       },
@@ -845,51 +839,53 @@ return {
       Rotation = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       Scale = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       FallingSpeed = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       FallingAcceleration = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       m_Height = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       State = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       MinRadius = {
         type = "value",
+        description = "For shockwaves.",
         valuetype = "number"
-      }, 
+      },
       MaxRadius = {
         type = "value",
+        description = "For shockwaves.",
         valuetype = "number"
-      }, 
+      },
       Timeout = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       LifeSpan = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       IsFollowing = {
         type = "value",
         valuetype = "boolean"
-      }, 
+      },
       ParentOffset = {
         type = "value",
         valuetype = "Vector"
-      }, 
+      },
       DamageSource = {
         type = "value",
         valuetype = "EntityType"
@@ -904,129 +900,129 @@ return {
         type = "method",
         args = "(integer value)",
         returns = "()"
-      }, 
+      },
       AddHearts = {
         type = "method",
         args = "(integer hearts)",
         returns = "()"
-      }, 
+      },
       AddKeys = {
         type = "method",
         args = "(integer keys)",
         returns = "()"
-      }, 
+      },
       PickEnemyTarget = {
         type = "method",
         args = "(float maxDistance, integer frameInterval)",
         returns = "()"
-      }, 
+      },
       FollowParent = {
         type = "method",
         args = "()",
         returns = "()"
-      }, 
+      },
       FollowPosition = {
         type = "method",
         args = "(Vector pos)",
         returns = "()"
-      }, 
+      },
       GetOrbitPosition = {
         type = "method",
         args = "(Vector pos)",
         returns = "(Vector)",
         valuetype = "Vector"
-      }, 
+      },
       Shoot = {
         type = "method",
         args = "()",
         returns = "()"
-      }, 
+      },
       FireProjectile = {
         type = "method",
         args = "(Direction dir)",
         returns = "()"
-      }, 
+      },
       PlayChargeAnim = {
         type = "method",
         args = "(Direction dir)",
         returns = "()"
-      }, 
+      },
       PlayShootAnim = {
         type = "method",
         args = "(Direction dir)",
         returns = "()"
-      }, 
+      },
       PlayFloatAnim = {
         type = "method",
         args = "(Direction dir)",
         returns = "()"
-      }, 
+      },
       MoveDelayed = {
         type = "method",
         args = "(integer numFrames)",
         returns = "()"
-      }, 
+      },
       MoveDiagonally = {
         type = "method",
         args = "(float speed)",
         returns = "()"
-      }, 
+      },
       Player = {
         type = "value",
         valuetype = "EntityPlayer"
-      }, 
+      },
       Coins = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       Hearts = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       Keys = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       FireCooldown = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       HeadFrameDelay = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       MoveDirection = {
         type = "value",
         valuetype = "Direction"
-      }, 
+      },
       ShootDirection = {
         type = "value",
         valuetype = "Direction"
-      }, 
+      },
       LastDirection = {
         type = "value",
         valuetype = "Direction"
-      }, 
+      },
       OrbitAngleOffset = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       OrbitDistance = {
         type = "value",
         valuetype = "Vector"
-      }, 
+      },
       OrbitSpeed = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       OrbitLayer = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       State = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       RoomClearCount = {
         type = "value",
         valuetype = "number"
@@ -1042,74 +1038,76 @@ return {
         args = "()",
         returns = "(integer)",
         valuetype = "number"
-      }, 
+      },
       Shoot = {
         type = "method",
         args = "(float charge, float range)",
         returns = "()"
-      }, 
+      },
       IsFlying = {
         type = "method",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
-      }, 
+      },
       GetKnifeDistance = {
         type = "method",
         args = "()",
         returns = "(float)",
         valuetype = "number"
-      }, 
+      },
       GetKnifeVelocity = {
         type = "method",
         args = "()",
         returns = "(float)",
         valuetype = "number"
-      }, 
+      },
       SetPathFollowSpeed = {
         type = "method",
         args = "(float speed)",
         returns = "()"
-      }, 
+      },
       Reset = {
         type = "method",
+        description = "Used for master knifes, to get back to player.",
         args = "()",
         returns = "()"
-      }, 
+      },
       TearFlags = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       Rotation = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       RotationOffset = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       Scale = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       MaxDistance = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       Charge = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       IsFlying = {
         type = "value",
         valuetype = "boolean"
-      }, 
+      },
       PathOffset = {
         type = "value",
         valuetype = "number"
-      }, 
+      },
       PathFollowSpeed = {
         type = "value",
+        description = "Unit speed of path moving knifes.",
         valuetype = "number"
       }
     }
@@ -1119,7 +1117,8 @@ return {
     inherits = "Entity",
     childs = {
       ShootAngle = {
-        type = "method",
+        type = "function",
+        description = "static helper to simplify spawning lasers",
         args = "(integer variant, Vector sourcePos, float angleDegrees, integer timeout, Vector posOffset, Entity source)",
         returns = "(EntityLaser)",
         valuetype = "EntityLaser"
@@ -1203,6 +1202,7 @@ return {
       },
       TearFlags = {
         type = "value",
+        description = "float m_DepthOffset;",
         valuetype = "number"
       },
       Angle = {
@@ -1219,6 +1219,7 @@ return {
       },
       StartAngleDegrees = {
         type = "value",
+        description = "Some lasers have a bit of random variation in rotation so they need to remember their starting point.",
         valuetype = "number"
       },
       AngleDegrees = {
@@ -1255,6 +1256,7 @@ return {
       },
       CurveStrength = {
         type = "value",
+        description = "My Reflection.",
         valuetype = "number"
       },
       IsActiveRotating = {
@@ -1275,6 +1277,7 @@ return {
       },
       MaxDistance = {
         type = "value",
+        description = "Used to trim brimstone for Azazel (0 - off)",
         valuetype = "number"
       },
       HomingType = {
@@ -1283,10 +1286,12 @@ return {
       },
       EndPoint = {
         type = "value",
+        description = "Will hold the endpoint so it will not need to be recalculated when accessed from extern.",
         valuetype = "Vector"
       },
       DisableFollowParent = {
         type = "value",
+        description = "Set on children of other lasers, for instance Rubber Cement reflections. Disables m_ParentOffset.",
         valuetype = "boolean"
       },
       BounceLaser = {
@@ -1295,14 +1300,17 @@ return {
       },
       BlackHpDropChance = {
         type = "value",
+        description = "For maw of void.",
         valuetype = "number"
       },
       OneHit = {
         type = "value",
+        description = "Laser hits only once.",
         valuetype = "boolean"
       },
       GridHit = {
         type = "value",
+        description = "true if laser can be clipped by grid entities and it was clipped at that frame.",
         valuetype = "boolean"
       }
     }
@@ -1318,6 +1326,7 @@ return {
       },
       KillUnique = {
         type = "method",
+        description = "For entities with unique death animation, like Flush! vs poop enemies.",
         args = "()",
         returns = "()"
       },
@@ -1329,7 +1338,7 @@ return {
       },
       ThrowSpider = {
         type = "method",
-        args = "(Vector position, Vector targetPos, boolean big, float yOffset)",
+        args = "(Vector position, Vector targetPos, boolean big, float YOffset)",
         returns = "()"
       },
       GetPlayerTarget = {
@@ -1375,6 +1384,7 @@ return {
       },
       MakeChampion = {
         type = "method",
+        description = "Forces a non champion to become a champion, resets hp to max hp.",
         args = "(integer seed)",
         returns = "()"
       },
@@ -1439,6 +1449,7 @@ return {
       },
       ParentNPC = {
         type = "value",
+        description = "parent entity, for multi-entity NPCs like Larry Jr.",
         valuetype = "EntityNPC"
       },
       ChildNPC = {
@@ -1463,30 +1474,37 @@ return {
       },
       ProjectileDelay = {
         type = "value",
+        description = ">0: projectile will be fired in n frames",
         valuetype = "number"
       },
       V1 = {
         type = "value",
+        description = "general usage for ai_* functions, initialized to (0,0)",
         valuetype = "Vector"
       },
       V2 = {
         type = "value",
+        description = "like m_V1, in case we need two of those",
         valuetype = "Vector"
       },
       I1 = {
         type = "value",
+        description = "general usage ints for ai_",
         valuetype = "number"
       },
       I2 = {
         type = "value",
+        description = "same as m_I1",
         valuetype = "number"
       },
       EntityRef = {
         type = "value",
+        description = "general usage for entity references.",
         valuetype = "Entity"
       },
       GroupIdx = {
         type = "value",
+        description = "Used to identify multichunks groups.",
         valuetype = "number"
       }
     }
@@ -1508,6 +1526,7 @@ return {
       },
       GetCoinValue = {
         type = "method",
+        description = "If this is a coin, return its face value, else zero.",
         args = "()",
         returns = "(integer)",
         valuetype = "number"
@@ -1763,11 +1782,13 @@ return {
       },
       QueueItem = {
         type = "method",
+        description = "Add Collectible/Trinket after animation is finished.",
         args = "(Config::Item item, integer charge, boolean touched)",
         returns = "()"
       },
       FlushQueueItem = {
         type = "method",
+        description = "called after animation is finished, or on special occasions to prevent bugs",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -1824,6 +1845,7 @@ return {
       },
       ClearTemporaryEffects = {
         type = "method",
+        description = "Will be called when player exits the room.",
         args = "()",
         returns = "()"
       },
@@ -1834,12 +1856,14 @@ return {
       },
       CanPickBlackHearts = {
         type = "method",
+        description = "returns true if player has room for more black hearts",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
       },
       CanPickGoldenHearts = {
         type = "method",
+        description = "returns true if player has room for more golden hearts",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -1886,6 +1910,7 @@ return {
       },
       FullCharge = {
         type = "method",
+        description = "return true if the item was fully charged, false otherwise. If player has battery it will first try to fill first charge slot, then the battery slot.",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -1961,6 +1986,7 @@ return {
       },
       AddCacheFlags = {
         type = "method",
+        description = "Reevaluate Damage, Firerate, Shot speed.",
         args = "(integer flags)",
         returns = "()"
       },
@@ -2004,6 +2030,30 @@ return {
         returns = "(Vector)",
         valuetype = "Vector"
       },
+      GetMovementVector = {
+        type = "method",
+        args = "()",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      GetRecentMovementVector = {
+        type = "method",
+        args = "()",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      GetMovementJoystick = {
+        type = "method",
+        args = "()",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      GetShootingJoystick = {
+        type = "method",
+        args = "()",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
       AreOpposingShootDirectionsPressed = {
         type = "method",
         args = "()",
@@ -2028,40 +2078,10 @@ return {
         returns = "(float)",
         valuetype = "number"
       },
-      GetFireDelay = {
-        type = "method",
-        args = "()",
-        returns = "(integer)",
-        valuetype = "number"
-      },
-      GetMaxFireDelay = {
-        type = "method",
-        args = "()",
-        returns = "(integer)",
-        valuetype = "number"
-      },
-      GetShotSpeed = {
-        type = "method",
-        args = "()",
-        returns = "(float)",
-        valuetype = "number"
-      },
-      GetTearDamage = {
-        type = "method",
-        args = "()",
-        returns = "(float)",
-        valuetype = "number"
-      },
       GetTearPoisonDamage = {
         type = "method",
         args = "()",
         returns = "(float)",
-        valuetype = "number"
-      },
-      GetTearFlags = {
-        type = "method",
-        args = "()",
-        returns = "(integer)",
         valuetype = "number"
       },
       GetBombFlags = {
@@ -2072,6 +2092,7 @@ return {
       },
       GetBombVariant = {
         type = "method",
+        description = "Pass tear flags to add extra effects to the bomb visual like burn -> hot bombs, even if player doesn't have Hot Bombs collectible. ForceSmallBomb will override large bomb variants for TEAR_PERSISTENT.",
         args = "(integer tearFlags, boolean forceSmallBomb)",
         returns = "(EntityBomb::BombVariant)",
         valuetype = "EntityBomb::BombVariant"
@@ -2102,6 +2123,7 @@ return {
       },
       GetBlackHearts = {
         type = "method",
+        description = "This does not return the # of black hearts, this returns the bit mask for which soul hearts are black hearts.",
         args = "()",
         returns = "(integer)",
         valuetype = "number"
@@ -2166,18 +2188,6 @@ return {
         returns = "(TrinketType)",
         valuetype = "TrinketType"
       },
-      GetLuck = {
-        type = "method",
-        args = "()",
-        returns = "(float)",
-        valuetype = "number"
-      },
-      GetSpeed = {
-        type = "method",
-        args = "()",
-        returns = "(float)",
-        valuetype = "number"
-      },
       GetNumBlueFlies = {
         type = "method",
         args = "()",
@@ -2200,24 +2210,6 @@ return {
         type = "method",
         args = "(CollectibleType item, boolean showAnim, boolean keepActiveItem, boolean allowNonMainPlayer, boolean toAddCostume)",
         returns = "()"
-      },
-      GetTearHeight = {
-        type = "method",
-        args = "()",
-        returns = "(float)",
-        valuetype = "number"
-      },
-      GetTearFallingSpeed = {
-        type = "method",
-        args = "()",
-        returns = "(float)",
-        valuetype = "number"
-      },
-      GetTearFallAcceleration = {
-        type = "method",
-        args = "()",
-        returns = "(float)",
-        valuetype = "number"
       },
       GetTearRangeModifier = {
         type = "method",
@@ -2257,12 +2249,14 @@ return {
       },
       CanPickupItem = {
         type = "method",
+        description = "Can Player pick up an item right now?",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
       },
       IsHoldingItem = {
         type = "method",
+        description = "Is Player holding up an item (card/collectible/etc)",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -2275,16 +2269,19 @@ return {
       },
       Revive = {
         type = "method",
+        description = "revive player",
         args = "()",
         returns = "()"
       },
       TryRemoveCollectibleCostume = {
         type = "method",
+        description = "tries to remove a costume based on some filters",
         args = "(CollectibleType collectible, boolean keepPersistent)",
         returns = "()"
       },
       TryRemoveTrinketCostume = {
         type = "method",
+        description = "tries to remove a costume based on some filters",
         args = "(TrinketType trinket)",
         returns = "()"
       },
@@ -2315,41 +2312,49 @@ return {
       },
       AnimateTrapdoor = {
         type = "method",
+        description = "end of a stage",
         args = "()",
         returns = "()"
       },
       AnimateLightTravel = {
         type = "method",
+        description = "end of a stage",
         args = "()",
         returns = "()"
       },
       AnimateAppear = {
         type = "method",
+        description = "beginning of a stage",
         args = "()",
         returns = "()"
       },
       AnimateTeleport = {
         type = "method",
+        description = "teleport to another room",
         args = "(boolean up)",
         returns = "()"
       },
       AnimateHappy = {
         type = "method",
+        description = "thumbs up",
         args = "()",
         returns = "()"
       },
       AnimateSad = {
         type = "method",
+        description = "oh no!",
         args = "()",
         returns = "()"
       },
       AnimatePitfallIn = {
         type = "method",
+        description = "Fall into pitfall.",
         args = "()",
         returns = "()"
       },
       AnimatePitfallOut = {
         type = "method",
+        description = "Jump out of pitfall.",
         args = "()",
         returns = "()"
       },
@@ -2408,6 +2413,7 @@ return {
       },
       HasInvincibility = {
         type = "method",
+        description = "returns true when player is in an invincibility state",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -2560,9 +2566,10 @@ return {
       },
       GetMultiShotPositionVelocity = {
         type = "method",
+        description = "Call this function in a loop with values from 0 to MultiShotParams.NumProjectiles-1 (inclusive)",
         args = "(integer loopIndex, WeaponType weapon, Vector shotDirection, float shotSpeed, MultiShotParams params)",
         returns = "(PosVel)",
-        valuetype = "PosVel"
+        valuetype = "PlayerTypes.PosVel"
       },
       GetFlyingOffset = {
         type = "method",
@@ -2603,6 +2610,68 @@ return {
       SpriteScale = {
         type = "value",
         valuetype = "Vector"
+      },
+      FireDelay = {
+        type = "value",
+        description = "How long until the player can spawn their next tear?",
+        valuetype = "number"
+      },
+      MaxFireDelay = {
+        type = "value",
+        description = "How long between each tear can spawn?",
+        valuetype = "number"
+      },
+      ShotSpeed = {
+        type = "value",
+        description = "How fast does the tear travel when spawned?",
+        valuetype = "number"
+      },
+      Damage = {
+        type = "value",
+        description = "How much damage do the players tears or other main weapons do?",
+        valuetype = "number"
+      },
+      TearHeight = {
+        type = "value",
+        description = "How high above the ground is the tear when it spawns? Affects range.",
+        valuetype = "number"
+      },
+      TearFallingSpeed = {
+        type = "value",
+        description = "How fast is the tear moving up or down when it spawns? Affects range.",
+        valuetype = "number"
+      },
+      TearFallingAcceleration = {
+        type = "value",
+        valuetype = "number"
+      },
+      MoveSpeed = {
+        type = "value",
+        description = "How fast can the player move?",
+        valuetype = "number"
+      },
+      TearFlags = {
+        type = "value",
+        description = "How much gravity does the tear have to start? Affects range.",
+        valuetype = "number"
+      },
+      TearColor = {
+        type = "value",
+        valuetype = "Color"
+      },
+      LaserColor = {
+        type = "value",
+        valuetype = "Color"
+      },
+      CanFly = {
+        type = "value",
+        description = "Can the player fly over rocks and pits?",
+        valuetype = "boolean"
+      },
+      Luck = {
+        type = "value",
+        description = "Better luck generally means better random events.",
+        valuetype = "number"
       }
     }
   },
@@ -2659,6 +2728,7 @@ return {
       },
       Entity = {
         type = "value",
+        description = "optional",
         valuetype = "Entity"
       }
     }
@@ -2704,11 +2774,13 @@ return {
       },
       BombExplosionEffects = {
         type = "method",
+        description = "The complete bomb explosion package: Do damage, spawn boomgraphics, and apply tearflag-based effects.",
         args = "(Vector position, float damage, integer tearFlags, Color color, Entity source, float radiusMult, boolean lineCheck, boolean damageSource)",
         returns = "()"
       },
       BombTearflagEffects = {
         type = "method",
+        description = "Does bomb-exclusive special effects.",
         args = "(KAGE::Math::Vector position, float radius, integer tearFlags, Entity source)",
         returns = "()"
       },
@@ -3065,7 +3137,7 @@ return {
       },
       ShowHallucination = {
         type = "method",
-        args = "()",
+        args = "(integer frameCount)",
         returns = "()"
       },
       HasHallucination = {
@@ -3252,6 +3324,7 @@ return {
       },
       Position = {
         type = "value",
+        description = "returns the position of the grid cell's center point",
         valuetype = "Vector"
       },
       CollisionClass = {
@@ -3284,7 +3357,6 @@ return {
       }
     }
   },
-
   GridEntityDesc = {
     type = "class",
     childs = {
@@ -3302,6 +3374,7 @@ return {
       },
       SpawnCount = {
         type = "value",
+        description = "how often this entity has been spawned",
         valuetype = "number"
       },
       SpawnSeed = {
@@ -3310,19 +3383,21 @@ return {
       },
       VarData = {
         type = "value",
+        description = "Additional data to be stored, when State is not enought.",
         valuetype = "number"
       },
       Initialized = {
         type = "value",
+        description = "this will be false when its first created",
         valuetype = "boolean"
       },
       VariableSeed = {
         type = "value",
+        description = "this seed will be changed based on some events",
         valuetype = "number"
       }
     }
   },
-
   GridEntityDoor = {
     type = "class",
     inherits = "GridEntity",
@@ -3360,12 +3435,14 @@ return {
       },
       TryBlowOpen = {
         type = "method",
+        description = "try to open the door by explosive force, true for success",
         args = "(boolean fromExplossion)",
         returns = "(boolean)",
         valuetype = "boolean"
       },
       TryUnlock = {
         type = "method",
+        description = "try to unlock the door using a key, true for success",
         args = "(boolean force)",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -3485,6 +3562,7 @@ return {
       },
       SetStage = {
         type = "method",
+        description = "for SetStage/SetNextStage to have effect, call Init afterward",
         args = "(LevelStage stage, StageType stageType)",
         returns = "()"
       },
@@ -3618,6 +3696,7 @@ return {
       },
       ForceHorsemanBoss = {
         type = "method",
+        description = "return true on success",
         args = "(integer seed)",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -3670,16 +3749,19 @@ return {
       },
       ApplyMapEffect = {
         type = "method",
+        description = "Map effect.",
         args = "()",
         returns = "()"
       },
       ApplyBlueMapEffect = {
         type = "method",
+        description = "Blue Map effect.",
         args = "()",
         returns = "()"
       },
       ApplyCompassEffect = {
         type = "method",
+        description = "Compass effect.",
         args = "(boolean persistent)",
         returns = "()"
       },
@@ -3690,6 +3772,7 @@ return {
       },
       ShowMap = {
         type = "method",
+        description = "Shows all map (world/sun card effect) except the top secret room.",
         args = "()",
         returns = "()"
       },
@@ -3755,6 +3838,7 @@ return {
       },
       UncoverHiddenDoor = {
         type = "method",
+        description = "Uncovers the door on both sides by modifying the saved grid entities for neighboring room.",
         args = "(integer currentRoomIdx, DoorSlot slot)",
         returns = "()"
       },
@@ -3771,6 +3855,7 @@ return {
       },
       GetAbsoluteStage = {
         type = "method",
+        description = "Returns the absolute stage, if its greed mode its converted to equivalent one.",
         args = "()",
         returns = "(LevelStage)",
         valuetype = "LevelStage"
@@ -3903,14 +3988,17 @@ return {
       },
       CircleAngle = {
         type = "value",
+        description = "Angle offset used by fire_projectiles PROJECTILES_CIRCLE type emitter. Random by default.",
         valuetype = "number"
       },
       HomingStrength = {
         type = "value",
+        description = "Multiplier on normal homing strength. Unused if SMART bullet flag is not set.",
         valuetype = "number"
       },
       CurvingStrength = {
         type = "value",
+        description = "Use very small values for curving like 0.005.",
         valuetype = "number"
       },
       Acceleration = {
@@ -3919,6 +4007,7 @@ return {
       },
       Spread = {
         type = "value",
+        description = "For quad/quint/etc spread shots.",
         valuetype = "number"
       },
       Color = {
@@ -3947,6 +4036,7 @@ return {
       },
       WiggleFrameOffset = {
         type = "value",
+        description = "Used to offset the wiggle wave.",
         valuetype = "number"
       },
       ChangeFlags = {
@@ -3955,10 +4045,12 @@ return {
       },
       ChangeVelocity = {
         type = "value",
+        description = "Velocity will resize to this length.",
         valuetype = "number"
       },
       ChangeTimeout = {
         type = "value",
+        description = "How many frames to wait before changing projectile properties if CHANGE_FLAGS_AFTER_TIMEOUT, CHANGE_VELOCITY_AFTER_TIMEOUT are set.",
         valuetype = "number"
       },
       DepthOffset = {
@@ -4059,6 +4151,7 @@ return {
       },
       IsDoorSlotAllowed = {
         type = "method",
+        description = "Returns whether this room design may have a door at a given position, disregarding whether those doors exist.",
         args = "(DoorSlot slot)",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -4105,6 +4198,7 @@ return {
       },
       GetRoomConfigStage = {
         type = "method",
+        description = "returns the original stage the room was designed for (useful for The Void)",
         args = "()",
         returns = "(RoomConfig::Stage)",
         valuetype = "RoomConfig::Stage"
@@ -4189,6 +4283,7 @@ return {
       },
       SetClear = {
         type = "method",
+        description = "Needed for angel room, so the clear flag can be set to false when the angel spawns.",
         args = "(boolean clear)",
         returns = "()"
       },
@@ -4425,11 +4520,13 @@ return {
       },
       GetBrokenWatchState = {
         type = "method",
+        description = "Broken Watch Room State - 0 = no watch effect, 1 = speed down, 2 = speed up.",
         args = "()",
         returns = "(integer)",
         valuetype = "number"
       },
       SetBrokenWatchState = {
+        description = "Broken Watch Room State - 0 = no watch effect, 1 = speed down, 2 = speed up.",
         type = "method",
         args = "(integer state)",
         returns = "()"
@@ -4521,6 +4618,7 @@ return {
       },
       GetRandomPosition = {
         type = "method",
+        description = "returns random non tile aligned position",
         args = "(float margin)",
         returns = "(Vector)",
         valuetype = "Vector"
@@ -4533,6 +4631,7 @@ return {
       },
       RespawnEnemies = {
         type = "method",
+        description = "for D7 collectible",
         args = "()",
         returns = "()"
       },
@@ -4971,6 +5070,11 @@ return {
     returns = "(Vector)",
     valuetype = "Vector",
     childs = {
+      Vector = {
+        type = "method",
+        args = "(float, float)",
+        returns = "()"
+      },
       Normalize = {
         type = "method",
         args = "()",
@@ -5090,6 +5194,7 @@ return {
       },
       X = {
         type = "value",
+        description = "Components of vector.",
         valuetype = "number"
       },
       Y = {
@@ -5118,34 +5223,34 @@ return {
   },
   Random = {
     type = "function",
+    description = "random integer [0, 2^32)",
     args = "()",
     returns = "(integer)",
     valuetype = "number"
   },
   RandomVector = {
     type = "function",
+    description = "random vector with length 1",
     args = "()",
     returns = "(Vector)",
     valuetype = "Vector"
   },
 
   ModCallbacks={
-    description="An enum of built-in callbacks.",
     type="lib",childs={
-      MC_NPC_UPDATE={value=0,type="value",valuetype="number"},
-      MC_POST_UPDATE={value=1,type="value",valuetype="number"},
-      MC_POST_RENDER={value=2,type="value",valuetype="number"},
-      MC_USE_ITEM={value=3,type="value",valuetype="number"},
-      MC_POST_PEFFECT_UPDATE={value=4,type="value",valuetype="number"},
-      MC_USE_CARD={value=5,type="value",valuetype="number"},
-      MC_FAMILIAR_UPDATE={value=6,type="value",valuetype="number"},
-      MC_FAMILIAR_INIT={value=7,type="value",valuetype="number"},
-      MC_EVALUATE_CACHE={value=8,type="value",valuetype="number"},
-      MC_POST_PLAYER_INIT={value=9,type="value",valuetype="number"},
-      MC_USE_PILL={value=10,type="value",valuetype="number"},
-      MC_ENTITY_TAKE_DMG={value=11,type="value",valuetype="number"}}},
+      MC_NPC_UPDATE={value=0,type="value",valuetype="number",description="Callback is a method that takes (EntityNPC). Called after an NPC is updated. When adding callback, specify an EntityType so it is only called for entities of that type."},
+      MC_POST_UPDATE={value=1,type="value",valuetype="number",description="Callback is a method with no arguments. Called after game update."},
+      MC_POST_RENDER={value=2,type="value",valuetype="number",description="Callback is a method with no arguments. Called after game render."},
+      MC_USE_ITEM={value=3,type="value",valuetype="number",description="Callback is a method that takes (CollectibleType, RNG). Return true to show the "use item" animation, otherwise false. Called when a custom active item is used, after discharging it. When adding callback, specify a CollectibleType to only respond to one custom active. The item RNG allows for the item's random events to be seeded."},
+      MC_POST_PEFFECT_UPDATE={value=4,type="value",valuetype="number",description="Callback is a method that takes (EntityPlayer). Called for each player, each frame, after the player evaluates the effects of items that must be constantly evaluated."},
+      MC_USE_CARD={value=5,type="value",valuetype="number",description="Callback is a method that takes (Card). Called when a custom card is used. When adding callback, specify a Card ID to only respond to one card type."},
+      MC_FAMILIAR_UPDATE={value=6,type="value",valuetype="number",description="Callback is a method that takes (Entity_Familiar). Called every frame for each custom familiar. When adding callback, specify a Variant to restrict calls to a specific familiar."},
+      MC_FAMILIAR_INIT={value=7,type="value",valuetype="number",description="Callback is a method that takes (Entity_Familiar). Called just after a custom familiar is initialized. When adding callback, specify a Variant to restrict calls to a specific familiar."},
+      MC_EVALUATE_CACHE={value=8,type="value",valuetype="number",description="Callback is a method that takes (EntityPlayer, CacheFlag). Called one or more times when a player's stats must be re-evaluated, such as after picking up an item, using certain pills, manually calling EvaluateItems on EntityPlayer. Use this to let custom items change the player's stats, familiars, flying, weapons, etc. Items tell the game which stats they affect using cache values in items.xml. Then the callback should respond to the CacheFlag by setting the corresponding player stat. Other items' stat modifiers, multipliers, etc are applied before this callback is called."},
+      MC_POST_PLAYER_INIT={value=9,type="value",valuetype="number",description="Callback is a method that takes (EntityPlayer). Called after the player is initialized."},
+      MC_USE_PILL={value=10,type="value",valuetype="number",description="Callback is a method that takes (PillEffect). Called when a custom pill is used. When adding callback, specify a PillEffect ID to only respond to one pill effect."},
+      MC_ENTITY_TAKE_DMG={value=11,type="value",valuetype="number",description="Callback is a method that takes (TookDamage : Entity, DamageAmount : number, DamageFlag : number (bit flags from DamageFlag enumeration), DamageSource : EntityRef, DamageCountdownFrames : number). Return true or nil if the entity or player should sustain the damage, otherwise false to ignore it. If the entity is an EntityPlayer, the DamageAmount is the integer number of half-hearts of damage that the player will take. Otherwise, DamageAmount is a number of hit points. Called before new damage is applied. A DAMAGE_COUNTDOWN flag means the entity will ignore any other DAMAGE_COUNTDOWN hits for the duration specified. When adding callback, specify an EntityType to respond to only damage taken by that entity type."}}},
   EntityType={
-    description="An enum of built-in entity types.",
     type="lib",childs={
       ENTITY_NULL={value=0,type="value",valuetype="number"},
       ENTITY_PLAYER={value=1,type="value",valuetype="number"},
@@ -5357,7 +5462,6 @@ return {
       ENTITY_EFFECT={value=1000,type="value",valuetype="number"},
       ENTITY_TEXT={value=9001,type="value",valuetype="number"}}},
   GridEntityType={
-    description="An enum of built-in grid entity types.",
     type="lib",childs={
       GRID_NULL={value=0,type="value",valuetype="number"},
       GRID_DECORATION={value=1,type="value",valuetype="number"},
@@ -5383,7 +5487,6 @@ return {
       GRID_STATUE={value=21,type="value",valuetype="number"},
       GRID_ROCK_SS={value=22,type="value",valuetype="number"}}},
   EffectVariant={
-    description="An enum of built-in effect types.",
     type="lib",childs={
       EFFECT_NULL={value=0,type="value",valuetype="number"},
       BOMB_EXPLOSION={value=1,type="value",valuetype="number"},
@@ -5491,7 +5594,6 @@ return {
       ULTRA_GREED_BLING={value=103,type="value",valuetype="number"},
       FIREWORKS={value=104,type="value",valuetype="number"}}},
   PickupVariant={
-    description="An enum of built-in pickup types.",
     type="lib",childs={
       PICKUP_NULL={value=0,type="value",valuetype="number"},
       PICKUP_HEART={value=10,type="value",valuetype="number"},
@@ -5515,7 +5617,6 @@ return {
       PICKUP_TROPHY={value=370,type="value",valuetype="number"},
       PICKUP_BED={value=380,type="value",valuetype="number"}}},
   HeartSubType={
-    description="An enum of built-in heart drop types.",
     type="lib",childs={
       HEART_FULL={value=1,type="value",valuetype="number"},
       HEART_HALF={value=2,type="value",valuetype="number"},
@@ -5528,7 +5629,6 @@ return {
       HEART_SCARED={value=9,type="value",valuetype="number"},
       HEART_BLENDED={value=10,type="value",valuetype="number"}}},
   CoinSubType={
-    description="An enum of built-in coin types.",
     type="lib",childs={
       COIN_PENNY={value=1,type="value",valuetype="number"},
       COIN_NICKEL={value=2,type="value",valuetype="number"},
@@ -5537,19 +5637,16 @@ return {
       COIN_LUCKYPENNY={value=5,type="value",valuetype="number"},
       COIN_STICKYNICKEL={value=6,type="value",valuetype="number"}}},
   KeySubType={
-    description="An enum of built-in key types.",
     type="lib",childs={
       KEY_NORMAL={value=1,type="value",valuetype="number"},
       KEY_GOLDEN={value=2,type="value",valuetype="number"},
       KEY_DOUBLEPACK={value=3,type="value",valuetype="number"},
       KEY_CHARGED={value=4,type="value",valuetype="number"}}},
   ChestSubType={
-    description="An enum of built-in chest states (open/closed).",
     type="lib",childs={
       CHEST_OPENED={value=0,type="value",valuetype="number"},
       CHEST_CLOSED={value=1,type="value",valuetype="number"}}},
   BombSubType={
-    description="An enum of built-in types of bomb drops.",
     type="lib",childs={
       BOMB_NORMAL={value=1,type="value",valuetype="number"},
       BOMB_DOUBLEPACK={value=2,type="value",valuetype="number"},
@@ -5557,14 +5654,12 @@ return {
       BOMB_GOLDEN={value=4,type="value",valuetype="number"},
       BOMB_SUPERTROLL={value=5,type="value",valuetype="number"}}},
   PickupPrice={
-    description="An enum of built-in pickup prices.",
     type="lib",childs={
       PRICE_ONE_HEART={value=-1,type="value",valuetype="number"},
       PRICE_TWO_HEARTS={value=-2,type="value",valuetype="number"},
       PRICE_THREE_SOULHEARTS={value=-3,type="value",valuetype="number"},
       PRICE_FREE={value=-1000,type="value",valuetype="number"}}},
   Challenge={
-    description="An enum of built-in challenges.",
     type="lib",childs={
       CHALLENGE_NULL={value=0,type="value",valuetype="number"},
       CHALLENGE_PITCH_BLACK={value=1,type="value",valuetype="number"},
@@ -5604,7 +5699,6 @@ return {
       CHALLENGE_PONG={value=35,type="value",valuetype="number"},
       NUM_CHALLENGES={value=36,type="value",valuetype="number"}}},
   BombVariant={
-    description="An enum of built-in bomb variants.",
     type="lib",childs={
       BOMB_NORMAL={value=1,type="value",valuetype="number"},
       BOMB_BIG={value=1,type="value",valuetype="number"},
@@ -5620,7 +5714,6 @@ return {
       BOMB_BOBBY={value=11,type="value",valuetype="number"},
       BOMB_GLITTER={value=12,type="value",valuetype="number"}}},
   CacheFlag={
-    description="An enum of built-in cache flags.",
     type="lib",childs={
       CACHE_DAMAGE={value=1,type="value",valuetype="number"},
       CACHE_FIREDELAY={value=2,type="value",valuetype="number"},
@@ -5635,7 +5728,6 @@ return {
       CACHE_LUCK={value=1024,type="value",valuetype="number"},
       CACHE_ALL={value=4294967295,type="value",valuetype="number"}}},
   NpcState={
-    description="An enum of built-in NPC states.",
     type="lib",childs={
       STATE_INIT={value=0,type="value",valuetype="number"},
       STATE_APPEAR={value=1,type="value",valuetype="number"},
@@ -5656,7 +5748,6 @@ return {
       STATE_UNIQUE_DEATH={value=16,type="value",valuetype="number"},
       STATE_DEATH={value=17,type="value",valuetype="number"}}},
   EntityGridCollisionClass={
-    description="???",
     type="lib",childs={
       GRIDCOLL_NONE={value=0,type="value",valuetype="number"},
       GRIDCOLL_WALLS_X={value=1,type="value",valuetype="number"},
@@ -5666,7 +5757,6 @@ return {
       GRIDCOLL_GROUND={value=5,type="value",valuetype="number"},
       GRIDCOLL_NOPITS={value=6,type="value",valuetype="number"}}},
   EntityCollisionClass={
-    description="???",
     type="lib",childs={
       ENTCOLL_NONE={value=0,type="value",valuetype="number"},
       ENTCOLL_PLAYERONLY={value=1,type="value",valuetype="number"},
@@ -5674,7 +5764,6 @@ return {
       ENTCOLL_ENEMIES={value=3,type="value",valuetype="number"},
       ENTCOLL_ALL={value=4,type="value",valuetype="number"}}},
   EntityFlag={
-    description="An enum of built-in entity flags.",
     type="lib",childs={
       FLAG_NO_STATUS_EFFECTS={value=1,type="value",valuetype="number"},
       FLAG_NO_INTERPOLATE={value=bit32.lshift(1,1),type="value",valuetype="number"},
@@ -5712,9 +5801,9 @@ return {
       FLAG_CONTAGIOUS={value=bit32.lshift(1,33),type="value",valuetype="number"},
       FLAG_BLEED_OUT={value=bit32.lshift(1,34),type="value",valuetype="number"}}},
   DamageFlag={
-    description="An enum of built-in damage flags.",
     type="lib",childs={
-      DAMAGE_NOKILL={value=1,type="value",valuetype="number"},DAMAGE_FIRE={value=bit32.lshift(1,1),type="value",valuetype="number"},
+      DAMAGE_NOKILL={value=1,type="value",valuetype="number"},
+      DAMAGE_FIRE={value=bit32.lshift(1,1),type="value",valuetype="number"},
       DAMAGE_EXPLOSION={value=bit32.lshift(1,2),type="value",valuetype="number"},
       DAMAGE_LASER={value=bit32.lshift(1,3),type="value",valuetype="number"},
       DAMAGE_ACID={value=bit32.lshift(1,4),type="value",valuetype="number"},
@@ -5736,13 +5825,11 @@ return {
       DAMAGE_CHEST={value=bit32.lshift(1,20),type="value",valuetype="number"},
       DAMAGE_FAKE={value=bit32.lshift(1,21),type="value",valuetype="number"}}},
   SortingLayer={
-    description="An enum of built-in sorting layers.",
     type="lib",childs={
-      SORTING_BACKGROUND={value=0,type="value",valuetype="number"},
-      SORTING_DOOR={value=1,type="value",valuetype="number"},
-      SORTING_NORMAL={value=2,type="value",valuetype="number"}}},
+      SORTING_BACKGROUND={value=0,type="value",valuetype="number",description="Background level, behind grid entities (creep, pitfalls)"},
+      SORTING_DOOR={value=1,type="value",valuetype="number",description="Used by door Xray animation"},
+      SORTING_NORMAL={value=2,type="value",valuetype="number",description="Uses Y position to determine Z sorting"}}},
   FamiliarVariant={
-    description="An enum of built-in famliars.",
     type="lib",childs={
       FAMILIAR_NULL={value=0,type="value",valuetype="number"},
       BROTHER_BOBBY={value=1,type="value",valuetype="number"},
@@ -5854,7 +5941,6 @@ return {
       BLOODSHOT_EYE={value=116,type="value",valuetype="number"},
       MOMS_RAZOR={value=117,type="value",valuetype="number"}}},
   LocustSubtypes={
-    description="???",
     type="lib",childs={
       LOCUST_OF_WRATH={value=1,type="value",valuetype="number"},
       LOCUST_OF_PESTILENCE={value=2,type="value",valuetype="number"},
@@ -5862,7 +5948,6 @@ return {
       LOCUST_OF_DEATH={value=4,type="value",valuetype="number"},
       LOCUST_OF_CONQUEST={value=5,type="value",valuetype="number"}}},
   ItemType={
-    description="An enum of built-in item types.",
     type="lib",childs={
       ITEM_NULL={value=0,type="value",valuetype="number"},
       ITEM_PASSIVE={value=1,type="value",valuetype="number"},
@@ -5870,7 +5955,6 @@ return {
       ITEM_ACTIVE={value=3,type="value",valuetype="number"},
       ITEM_FAMILIAR={value=4,type="value",valuetype="number"}}},
   NullItemID={
-    description="???",
     type="lib",childs={
       ID_NULL={value=-1,type="value",valuetype="number"},
       ID_EXPLOSIVE_DIARRHEA={value=0,type="value",valuetype="number"},
@@ -5915,7 +5999,6 @@ return {
       ID_SPIDERBABY={value=39,type="value",valuetype="number"},
       NUM_NULLITEMS={value=40,type="value",valuetype="number"}}},
   WeaponType={
-    description="An enum of built-in weapon types.",
     type="lib",childs={
       WEAPON_TEARS={value=1,type="value",valuetype="number"},
       WEAPON_BRIMSTONE={value=2,type="value",valuetype="number"},
@@ -5928,7 +6011,6 @@ return {
       WEAPON_TECH_X={value=9,type="value",valuetype="number"},
       NUM_WEAPON_TYPES={value=10,type="value",valuetype="number"}}},
   PlayerItemState={
-    description="An enum of built-in player item states.",
     type="lib",childs={
       ITEMSTATE_NORMAL={value=0,type="value",valuetype="number"},
       ITEMSTATE_CANDLE={value=1,type="value",valuetype="number"},
@@ -5941,7 +6023,6 @@ return {
       ITEMSTATE_CANNON={value=8,type="value",valuetype="number"},
       ITEMSTATE_FRIENDBALL={value=9,type="value",valuetype="number"}}},
   PlayerSpriteLayer={
-    description="An enum of built-in player sprite layers.",
     type="lib",childs={
       SPRITE_GLOW={value=0,type="value",valuetype="number"},
       SPRITE_BODY={value=1,type="value",valuetype="number"},
@@ -5958,7 +6039,6 @@ return {
       SPRITE_EXTRA={value=12,type="value",valuetype="number"},
       NUM_SPRITE_LAYERS={value=13,type="value",valuetype="number"}}},
   BabySubType={
-    description="An enum of built-in coop (?) babies.",
     type="lib",childs={
       BABY_UNASSIGNED={value=-1,type="value",valuetype="number"},
       BABY_SPIDER={value=0,type="value",valuetype="number"},
@@ -6020,7 +6100,6 @@ return {
       BABY_APOLLYON={value=56,type="value",valuetype="number"},
       BABY_BASIC={value=57,type="value",valuetype="number"}}},
   LaserOffset={
-    description="An enum of built-in laser offsets.",
     type="lib",childs={
       LASER_TECH1_OFFSET={value=0,type="value",valuetype="number"},
       LASER_TECH2_OFFSET={value=1,type="value",valuetype="number"},
@@ -6030,7 +6109,6 @@ return {
       LASER_MOMS_EYE_OFFSET={value=5,type="value",valuetype="number"},
       LASER_TRACTOR_BEAM_OFFSET={value=6,type="value",valuetype="number"}}},
   ActionTriggers={
-    description="An enum of built-in action triggers.",
     type="lib",childs={
       ACTIONTRIGGER_NONE={value=0,type="value",valuetype="number"},
       ACTIONTRIGGER_BOMBPLACED={value=1,type="value",valuetype="number"},
@@ -6040,7 +6118,6 @@ return {
       ACTIONTRIGGER_ITEMACTIVATED={value=bit32.lshift(1,4),type="value",valuetype="number"},
       ACTIONTRIGGER_ITEMSDROPPED={value=bit32.lshift(1,5),type="value",valuetype="number"}}},
   GridCollisionClass={
-    description="An enum of build-in grid collisions.",
     type="lib",childs={
       COLLISION_NONE={value=0,type="value",valuetype="number"},
       COLLISION_PIT={value=1,type="value",valuetype="number"},
@@ -6049,7 +6126,6 @@ return {
       COLLISION_WALL={value=4,type="value",valuetype="number"},
       COLLISION_WALL_EXCEPT_PLAYER={value=5,type="value",valuetype="number"}}},
   Direction={
-    description="An enum of built-in directions.",
     type="lib",childs={
       NO_DIRECTION={value=-1,type="value",valuetype="number"},
       LEFT={value=0,type="value",valuetype="number"},
@@ -6057,7 +6133,6 @@ return {
       RIGHT={value=2,type="value",valuetype="number"},
       DOWN={value=3,type="value",valuetype="number"}}},
   LevelStage={
-    description="An enum of built-in stages.",
     type="lib",childs={
       STAGE_NULL={value=0,type="value",valuetype="number"},
       STAGE1_1={value=1,type="value",valuetype="number"},
@@ -6081,14 +6156,12 @@ return {
       STAGE6_GREED={value=6,type="value",valuetype="number"},
       STAGE7_GREED={value=7,type="value",valuetype="number"}}},
   StageType={
-    description="An enum of built-in stage (?) types.",
     type="lib",childs={
       STAGETYPE_ORIGINAL={value=0,type="value",valuetype="number"},
       STAGETYPE_WOTL={value=1,type="value",valuetype="number"},
       STAGETYPE_AFTERBIRTH={value=2,type="value",valuetype="number"},
       STAGETYPE_GREEDMODE={value=3,type="value",valuetype="number"}}},
   RoomType={
-    description="An enum of built-in room types.",
     type="lib",childs={
       ROOM_NULL={value=0,type="value",valuetype="number"},
       ROOM_DEFAULT={value=1,type="value",valuetype="number"},
@@ -6116,7 +6189,6 @@ return {
       ROOM_GREED_EXIT={value=23,type="value",valuetype="number"},
       NUM_ROOMTYPES={value=24,type="value",valuetype="number"}}},
   RoomShape={
-    description="An enum of built-in room shapes.",
     type="lib",childs={
       ROOMSHAPE_1x1={value=1,type="value",valuetype="number"},
       ROOMSHAPE_IH={value=2,type="value",valuetype="number"},
@@ -6132,7 +6204,6 @@ return {
       ROOMSHAPE_LBR={value=12,type="value",valuetype="number"},
       NUM_ROOMSHAPES={value=13,type="value",valuetype="number"}}},
   DoorSlot={
-    description="An enum of built-in door positions.",
     type="lib",childs={
       NO_DOOR_SLOT={value=-1,type="value",valuetype="number"},
       LEFT0={value=0,type="value",valuetype="number"},
@@ -6145,7 +6216,6 @@ return {
       DOWN1={value=7,type="value",valuetype="number"},
       NUM_DOOR_SLOTS={value=8,type="value",valuetype="number"}}},
   LevelCurse={
-    description="An enum of built-in curses.",
     type="lib",childs={
       CURSE_NONE={value=0,type="value",valuetype="number"},
       CURSE_OF_DARKNESS={value=1,type="value",valuetype="number"},
@@ -6157,7 +6227,6 @@ return {
       CURSE_OF_BLIND={value=bit32.lshift(1,6),type="value",valuetype="number"},
       NUM_CURSES={value=8,type="value",valuetype="number"}}},
   PlayerType={
-    description="An enum of built-in playable characters.",
     type="lib",childs={
       PLAYER_ISAAC={value=0,type="value",valuetype="number"},
       PLAYER_MAGDALENA={value=1,type="value",valuetype="number"},
@@ -6177,7 +6246,6 @@ return {
       PLAYER_APOLLYON={value=15,type="value",valuetype="number"},
       NUM_PLAYER_TYPES={value=16,type="value",valuetype="number"}}},
   PlayerForm={
-    description="An enum of built-in transformations (also contains the value for coop baby?).",
     type="lib",childs={
       PLAYERFORM_GUPPY={value=0,type="value",valuetype="number"},
       PLAYERFORM_LORD_OF_THE_FLIES={value=1,type="value",valuetype="number"},
@@ -6194,7 +6262,6 @@ return {
       PLAYERFORM_SPIDERBABY={value=12,type="value",valuetype="number"},
       NUM_PLAYER_FORMS={value=13,type="value",valuetype="number"}}},
   PillColor={
-    description="An enum of buil-in pill colors.",
     type="lib",childs={
       PILL_NULL={value=0,type="value",valuetype="number"},
       PILL_BLUE_BLUE={value=1,type="value",valuetype="number"},
@@ -6212,7 +6279,6 @@ return {
       PILL_WHITE_YELLOW={value=13,type="value",valuetype="number"},
       NUM_PILLS={value=14,type="value",valuetype="number"}}},
   Music={
-    description="An enum of built-in music.",
     type="lib",childs={
       MUSIC_NULL={value=0,type="value",valuetype="number"},
       MUSIC_BASEMENT={value=1,type="value",valuetype="number"},
@@ -6275,7 +6341,6 @@ return {
       MUSIC_VOID_BOSS={value=103,type="value",valuetype="number"},
       NUM_MUSIC={value=104,type="value",valuetype="number"}}},
   SoundEffect={
-    description="An enum of built-in sounds.",
     type="lib",childs={
       SOUND_NULL={value=0,type="value",valuetype="number"},
       SOUND_1UP={value=1,type="value",valuetype="number"},
@@ -6583,7 +6648,6 @@ return {
       SOUND_BLACK_RUNE={value=457,type="value",valuetype="number"},
       NUM_SOUND_EFFECTS={value=458,type="value",valuetype="number"}}},
   DoorState={
-    description="An enum of built-in door states.",
     type="lib",childs={
       STATE_INIT={value=0,type="value",valuetype="number"},
       STATE_CLOSED={value=1,type="value",valuetype="number"},
@@ -6591,7 +6655,6 @@ return {
       STATE_ONE_CHAIN={value=3,type="value",valuetype="number"},
       STATE_HALF_CRACKED={value=4,type="value",valuetype="number"}}},
   DoorVariant={
-    description="An enum of built-in door types.",
     type="lib",childs={
       DOOR_UNSPECIFIED={value=0,type="value",valuetype="number"},
       DOOR_LOCKED={value=1,type="value",valuetype="number"},
@@ -6603,14 +6666,12 @@ return {
       DOOR_HIDDEN={value=7,type="value",valuetype="number"},
       DOOR_UNLOCKED={value=8,type="value",valuetype="number"}}},
   Difficulty={
-    description="An enum of built-in game modes/difficulties.",
     type="lib",childs={
       DIFFICULTY_NORMAL={value=0,type="value",valuetype="number"},
       DIFFICULTY_HARD={value=1,type="value",valuetype="number"},
       DIFFICULTY_GREED={value=2,type="value",valuetype="number"},
       DIFFICULTY_GREEDIER={value=3,type="value",valuetype="number"}}},
   LevelStateFlag={
-    description="An enum of built-in floor states.",
     type="lib",childs={
       STATE_BUM_KILLED={value=0,type="value",valuetype="number"},
       STATE_EVIL_BUM_KILLED={value=1,type="value",valuetype="number"},
@@ -6629,7 +6690,6 @@ return {
       STATE_MAMA_MEGA_USED={value=14,type="value",valuetype="number"},
       NUM_STATE_FLAGS={value=15,type="value",valuetype="number"}}},
   GameStateFlag={
-    description="An enum of built-in game states.",
     type="lib",childs={
       STATE_FAMINE_SPAWNED={value=0,type="value",valuetype="number"},
       STATE_PESTILENCE_SPAWNED={value=1,type="value",valuetype="number"},
@@ -6677,7 +6737,6 @@ return {
       STATE_SISTERS_VIS_SELECTED={value=43,type="value",valuetype="number"},
       NUM_STATE_FLAGS={value=15,type="value",valuetype="number"}}},
   CollectibleType={
-    description="An enum of built-in items.",
     type="lib",childs={
       COLLECTIBLE_NULL={value=0,type="value",valuetype="number"},
       COLLECTIBLE_SAD_ONION={value=1,type="value",valuetype="number"},
@@ -7192,7 +7251,6 @@ return {
       COLLECTIBLE_DELIRIOUS={value=510,type="value",valuetype="number"},
       NUM_COLLECTIBLES={value=511,type="value",valuetype="number"}}},
   TrinketType={
-    description="An enum of built-in trinkets.",
     type="lib",childs={
       TRINKET_NULL={value=0,type="value",valuetype="number"},
       TRINKET_SWALLOWED_PENNY={value=1,type="value",valuetype="number"},
@@ -7316,7 +7374,6 @@ return {
       TRINKET_STEM_CELL={value=119,type="value",valuetype="number"},
       NUM_TRINKETS={value=120,type="value",valuetype="number"}}},
   PillEffect={
-    description="An enum of built-in pill effects.",
     type="lib",childs={
       PILLEFFECT_NULL={value=-1,type="value",valuetype="number"},
       PILLEFFECT_BAD_GAS={value=0,type="value",valuetype="number"},
@@ -7368,7 +7425,6 @@ return {
       PILLEFFECT_VURP={value=46,type="value",valuetype="number"},
       NUM_PILL_EFFECTS={value=47,type="value",valuetype="number"}}},
   Card={
-    description="An enum of built-in cards.",
     type="lib",childs={
       CARD_RANDOM={value=-1,type="value",valuetype="number"},
       CARD_NULL={value=0,type="value",valuetype="number"},
@@ -7423,7 +7479,5 @@ return {
       CARD_DICE_SHARD={value=49,type="value",valuetype="number"},
       CARD_EMERGENCY_CONTACT={value=50,type="value",valuetype="number"},
       CARD_HOLY={value=51,type="value",valuetype="number"},
-      NUM_CARDS={value=52,type="value",valuetype="number"}
-    }
-  }
+      NUM_CARDS={value=52,type="value",valuetype="number"}}}
 }
