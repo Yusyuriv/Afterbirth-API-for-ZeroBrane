@@ -2,7 +2,7 @@ local interpreter = {
   name = "Binding of Isaac: Afterbirth+ API",
   description = "Binding of Isaac: Afterbirth+ modding API",
   api = {"baselib", "bindingofisaacafterbirthplusapi"},
-  hasdebugger = true,
+  fattachdebug = function(self) DebuggerAttachDefault() end,
   skipcompile = true,
 }
 
