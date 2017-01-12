@@ -2468,8 +2468,8 @@ local api = {
       FireTear = {
         type = "method",
         args = "(Vector position, Vector velocity, boolean canBeEye, boolean noTractorBeam, boolean canTriggerStreakEnd)",
-        returns = "(Entity_Tear)",
-        valuetype = "Entity_Tear"
+        returns = "(EntityTear)",
+        valuetype = "EntityTear"
       },
       FireBomb = {
         type = "method",
@@ -2743,6 +2743,126 @@ local api = {
         type = "value",
         description = "optional",
         valuetype = "Entity"
+      }
+    }
+  },
+  EntityTear = {
+    type = "class",
+    inherits = "Entity",
+    childs = {
+      SetKnockbackMultiplier = {
+        type = "method",
+        args = "(float multiplier)",
+        returns = "()"
+      },
+      SetWaitFrames = {
+        type = "method",
+        args = "(integer value)",
+        returns = "()"
+      },
+      SetDeadEyeIntensity = {
+        type = "method",
+        args = "(float intensity)",
+        returns = "()"
+      },
+      ChangeVariant = {
+        type = "method",
+        args = "(integer newVariant)",
+        returns = "()"
+      },
+      SetParentOffset = {
+        type = "method",
+        args = "(Vector offset)",
+        returns = "()"
+      },
+      ResetSpriteScale = {
+        type = "method",
+        description = "Resets the tear sprite animation depending on scale.",
+        args = "()",
+        returns = "()"
+      },
+      Height = {
+        type = "value",
+        valuetype = "number"
+      },
+      FallingSpeed = {
+        type = "value",
+        valuetype = "number"
+      },
+      FallingAcceleration = {
+        type = "value",
+        valuetype = "number"
+      },
+      Scale = {
+        type = "value",
+        valuetype = "number"
+      },
+      TearFlags = {
+        type = "value",
+        valuetype = "number"
+      },
+      TearIndex = {
+        type = "value",
+        valuetype = "number"
+      },
+      Rotation = {
+        type = "value",
+        valuetype = "number"
+      },
+      HomingFriction = {
+        type = "value",
+        valuetype = "number"
+      },
+      BaseScale = {
+        type = "value",
+        valuetype = "number"
+      },
+      WaitFrames = {
+        type = "value",
+        valuetype = "number"
+      },
+      ContinueVelocity = {
+        type = "value",
+        valuetype = "Vector"
+      },
+      BaseDamage = {
+        type = "value",
+        valuetype = "number"
+      },
+      KnockbackMultiplier = {
+        type = "value",
+        valuetype = "number"
+      },
+      Bounced = {
+        type = "value",
+        description = "true if tear bounced of something",
+        valuetype = "boolean"
+      },
+      StickTarget = {
+        type = "value",
+        valuetype = "Entity"
+      },
+      StickDiff = {
+        type = "value",
+        valuetype = "Vector"
+      },
+      StickTimer = {
+        type = "value",
+        valuetype = "number"
+      },
+      CanTriggerStreakEnd = {
+        type = "value",
+        description = "For Onan's strak and Dead Eye.",
+        valuetype = "boolean"
+      },
+      PosDisplacement = {
+        type = "value",
+        valuetype = "const Vector"
+      },
+      ParentOffset = {
+        type = "value",
+        description = "Used for Position adjustment (vs PositionOffset which is a render offset)",
+        valuetype = "Vector"
       }
     }
   },
