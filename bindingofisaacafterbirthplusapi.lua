@@ -106,6 +106,7 @@ local api = {
       },
       AddPillEffectToPool = {
         type = "function",
+        description = "returns pill color",
         args = "(integer pillEffect)",
         returns = "(integer)",
         valuetype = "number"
@@ -174,6 +175,12 @@ local api = {
       GetCostumeIdByPath = {
         type = "function",
         args = "(string path)",
+        returns = "(integer)",
+        valuetype = "number"
+      },
+      GetCurseIdByName = {
+        type = "function",
+        args = "(string curseName)",
         returns = "(integer)",
         valuetype = "number"
       },
@@ -897,6 +904,7 @@ local api = {
       },
       ParentOffset = {
         type = "value",
+        description = "probably obsolete soon, in favor of m_SpriteOffset",
         valuetype = "Vector"
       },
       DamageSource = {
@@ -1167,14 +1175,14 @@ local api = {
       GetSamples = {
         type = "method",
         args = "()",
-        returns = "(HomingLaser::SamplList)",
-        valuetype = "HomingLaser::SamplList"
+        returns = "(HomingLaser::SampleList)",
+        valuetype = "HomingLaser::SampleList"
       },
       GetNonOptimizedSamples = {
         type = "method",
         args = "()",
-        returns = "(HomingLaser::SamplList)",
-        valuetype = "HomingLaser::SamplList"
+        returns = "(HomingLaser::SampleList)",
+        valuetype = "HomingLaser::SampleList"
       },
       SetOneHit = {
         type = "method",
@@ -1356,6 +1364,7 @@ local api = {
       },
       GetPlayerTarget = {
         type = "method",
+        description = "if there are no modifiers (best friend) this will return the player",
         args = "()",
         returns = "(Entity)",
         valuetype = "Entity"
@@ -1420,12 +1429,12 @@ local api = {
       },
       FireProjectiles = {
         type = "method",
-        args = "(Vector pos, Vector velocity, ProjectilesMode mode, ProjectilParams params)",
+        args = "(Vector pos, Vector velocity, ProjectilesMode mode, ProjectileParams params)",
         returns = "()"
       },
       FireBossProjectiles = {
         type = "method",
-        args = "(integer numProjectiles, Vector targetPos, float trajectoryModifier, ProjectilParams params)",
+        args = "(integer numProjectiles, Vector targetPos, float trajectoryModifier, ProjectileParams params)",
         returns = "(Entity_Projectile)",
         valuetype = "Entity_Projectile"
       },
@@ -2051,6 +2060,7 @@ local api = {
       },
       GetRecentMovementVector = {
         type = "method",
+        description = "Returns the joystick direction that drives player movement, taking into account certain modifiers like disabled controls and seed effects.",
         args = "()",
         returns = "(Vector)",
         valuetype = "Vector"
@@ -2069,6 +2079,7 @@ local api = {
       },
       AreOpposingShootDirectionsPressed = {
         type = "method",
+        description = "Returns the non-zero joystick direction from the most recent movement input, but goes to zero after the player comes to a stop.",
         args = "()",
         returns = "(boolean)",
         valuetype = "boolean"
@@ -2631,27 +2642,27 @@ local api = {
       },
       MaxFireDelay = {
         type = "value",
-        description = "How long between each tear can spawn?",
+        description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. How long between each tear can spawn?",
         valuetype = "number"
       },
       ShotSpeed = {
         type = "value",
-        description = "How fast does the tear travel when spawned?",
+        description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. How fast does the tear travel when spawned?",
         valuetype = "number"
       },
       Damage = {
         type = "value",
-        description = "How much damage do the players tears or other main weapons do?",
+        description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. How much damage do the players tears or other main weapons do?",
         valuetype = "number"
       },
       TearHeight = {
         type = "value",
-        description = "How high above the ground is the tear when it spawns? Affects range.",
+        description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. How high above the ground is the tear when it spawns? Affects range.",
         valuetype = "number"
       },
       TearFallingSpeed = {
         type = "value",
-        description = "How fast is the tear moving up or down when it spawns? Affects range.",
+        description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. How fast is the tear moving up or down when it spawns? Affects range.",
         valuetype = "number"
       },
       TearFallingAcceleration = {
@@ -2660,12 +2671,12 @@ local api = {
       },
       MoveSpeed = {
         type = "value",
-        description = "How fast can the player move?",
+        description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. How fast can the player move?",
         valuetype = "number"
       },
       TearFlags = {
         type = "value",
-        description = "How much gravity does the tear have to start? Affects range.",
+        description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. How much gravity does the tear have to start? Affects range.",
         valuetype = "number"
       },
       TearColor = {
@@ -2678,12 +2689,12 @@ local api = {
       },
       CanFly = {
         type = "value",
-        description = "Can the player fly over rocks and pits?",
+        description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. Can the player fly over rocks and pits?",
         valuetype = "boolean"
       },
       Luck = {
         type = "value",
-        description = "Better luck generally means better random events.",
+        description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. Better luck generally means better random events.",
         valuetype = "number"
       }
     }
@@ -3030,7 +3041,7 @@ local api = {
       },
       StartStageTransition = {
         type = "method",
-        args = "(boolean sameStage, StagTransition::Animation animation)",
+        args = "(boolean sameStage, StageTransition::Animation animation)",
         returns = "()"
       },
       MoveToRandomRoom = {
@@ -3270,7 +3281,7 @@ local api = {
       },
       ShowHallucination = {
         type = "method",
-        args = "(integer frameCount, Backdrop::Backdrop HallucinationBackdrop)",
+        args = "(integer frameCount, Backdrop::Backdrop hallucinationBackdrop)",
         returns = "()"
       },
       HasHallucination = {
@@ -3459,10 +3470,6 @@ local api = {
         type = "value",
         description = "returns the position of the grid cell's center point",
         valuetype = "Vector"
-      },
-      CollisionClass = {
-        type = "value",
-        valuetype = "CollisionClass"
       },
       State = {
         type = "value",
@@ -4483,8 +4490,8 @@ local api = {
       GetLRoomTileDesc = {
         type = "method",
         args = "()",
-        returns = "(LRoomTilDesc)",
-        valuetype = "LRoomTilDesc"
+        returns = "(LRoomTileDesc)",
+        valuetype = "LRoomTileDesc"
       },
       GetTopLeftPos = {
         type = "method",
@@ -4659,8 +4666,8 @@ local api = {
         valuetype = "number"
       },
       SetBrokenWatchState = {
-        description = "Broken Watch Room State - 0 = no watch effect, 1 = speed down, 2 = speed up.",
         type = "method",
+        description = "Broken Watch Room State - 0 = no watch effect, 1 = speed down, 2 = speed up.",
         args = "(integer state)",
         returns = "()"
       },
@@ -4704,7 +4711,7 @@ local api = {
       },
       SetShockwaveParam = {
         type = "method",
-        args = "(integer shockwaveId, ShockwavParams params)",
+        args = "(integer shockwaveId, ShockwaveParams params)",
         returns = "()"
       },
       GetNextShockwaveId = {
@@ -4843,6 +4850,35 @@ local api = {
         args = "(Vector worldPos)",
         returns = "(Vector)",
         valuetype = "Vector"
+      }
+    }
+  },
+  ShockwaveParams = {
+    type = "class",
+    childs = {
+      Position = {
+        type = "value",
+        valuetype = "Vector"
+      },
+      Time = {
+        type = "value",
+        valuetype = "number"
+      },
+      Strength = {
+        type = "value",
+        valuetype = "number"
+      },
+      TimeDT = {
+        type = "value",
+        valuetype = "number"
+      },
+      Age = {
+        type = "value",
+        valuetype = "number"
+      },
+      LifeSpan = {
+        type = "value",
+        valuetype = "number"
       }
     }
   },
@@ -5403,7 +5439,8 @@ local api = {
       MC_EVALUATE_CACHE={value=8,type="value",valuetype="number",description="Callback is a method that takes (EntityPlayer, CacheFlag). Called one or more times when a player's stats must be re-evaluated, such as after picking up an item, using certain pills, manually calling EvaluateItems on EntityPlayer. Use this to let custom items change the player's stats, familiars, flying, weapons, etc. Items tell the game which stats they affect using cache values in items.xml. Then the callback should respond to the CacheFlag by setting the corresponding player stat. Other items' stat modifiers, multipliers, etc are applied before this callback is called."},
       MC_POST_PLAYER_INIT={value=9,type="value",valuetype="number",description="Callback is a method that takes (EntityPlayer). Called after the player is initialized."},
       MC_USE_PILL={value=10,type="value",valuetype="number",description="Callback is a method that takes (PillEffect). Called when a custom pill is used. When adding callback, specify a PillEffect ID to only respond to one pill effect."},
-      MC_ENTITY_TAKE_DMG={value=11,type="value",valuetype="number",description="Callback is a method that takes (TookDamage : Entity, DamageAmount : number, DamageFlag : number (bit flags from DamageFlag enumeration), DamageSource : EntityRef, DamageCountdownFrames : number). Return true or nil if the entity or player should sustain the damage, otherwise false to ignore it. If the entity is an EntityPlayer, the DamageAmount is the integer number of half-hearts of damage that the player will take. Otherwise, DamageAmount is a number of hit points. Called before new damage is applied. A DAMAGE_COUNTDOWN flag means the entity will ignore any other DAMAGE_COUNTDOWN hits for the duration specified. When adding callback, specify an EntityType to respond to only damage taken by that entity type."}}},
+      MC_ENTITY_TAKE_DMG={value=11,type="value",valuetype="number",description="Callback is a method that takes (TookDamage : Entity, DamageAmount : number, DamageFlag : number (bit flags from DamageFlag enumeration), DamageSource : EntityRef, DamageCountdownFrames : number). Return true or nil if the entity or player should sustain the damage, otherwise false to ignore it. If the entity is an EntityPlayer, the DamageAmount is the integer number of half-hearts of damage that the player will take. Otherwise, DamageAmount is a number of hit points. Called before new damage is applied. A DAMAGE_COUNTDOWN flag means the entity will ignore any other DAMAGE_COUNTDOWN hits for the duration specified. When adding callback, specify an EntityType to respond to only damage taken by that entity type."},
+      MC_POST_CURSE_EVAL={value=12,type="value",valuetype="number",description="Callback is a method that takes (integer Curses). Curses is a bitmask containing current curses. Called after Level applied it's curses. Returns the new curse bitmask. Use Isaac.GetCurseIdByName to get a custom curse"}}},
   EntityType={
     type="lib",childs={
       ENTITY_NULL={value=0,type="value",valuetype="number"},
@@ -7633,12 +7670,47 @@ local api = {
       CARD_DICE_SHARD={value=49,type="value",valuetype="number"},
       CARD_EMERGENCY_CONTACT={value=50,type="value",valuetype="number"},
       CARD_HOLY={value=51,type="value",valuetype="number"},
-      NUM_CARDS={value=52,type="value",valuetype="number"}}}
+      NUM_CARDS={value=52,type="value",valuetype="number"}}},
+  TearVariant={
+    type="lib",childs={
+      BLUE={value=0,type="value",valuetype="number"},
+      BLOOD={value=1,type="value",valuetype="number"},
+      TOOTH={value=2,type="value",valuetype="number"},
+      METALLIC={value=3,type="value",valuetype="number"},
+      BOBS_HEAD={value=4,type="value",valuetype="number"},
+      FIRE_MIND={value=5,type="value",valuetype="number"},
+      DARK_MATTER={value=6,type="value",valuetype="number"},
+      MYSTERIOUS={value=7,type="value",valuetype="number"},
+      SCHYTHE={value=8,type="value",valuetype="number"},
+      CHAOS_CARD={value=9,type="value",valuetype="number"},
+      LOST_CONTACT={value=10,type="value",valuetype="number"},
+      CUPID_BLUE={value=11,type="value",valuetype="number"},
+      CUPID_BLOOD={value=12,type="value",valuetype="number"},
+      NAIL={value=13,type="value",valuetype="number"},
+      PUPULA={value=14,type="value",valuetype="number"},
+      PUPULA_BLOOD={value=15,type="value",valuetype="number"},
+      GODS_FLESH={value=16,type="value",valuetype="number"},
+      GODS_FLESH_BLOOD={value=17,type="value",valuetype="number"},
+      DIAMOND={value=18,type="value",valuetype="number"},
+      EXPLOSIVO={value=19,type="value",valuetype="number"},
+      COIN={value=20,type="value",valuetype="number"},
+      MULTIDIMENSIONAL={value=21,type="value",valuetype="number"},
+      STONE={value=22,type="value",valuetype="number"},
+      NAIL_BLOOD={value=23,type="value",valuetype="number"},
+      GLAUCOMA={value=24,type="value",valuetype="number"},
+      GLAUCOMA_BLOOD={value=25,type="value",valuetype="number"},
+      BOOGER={value=26,type="value",valuetype="number"},
+      EGG={value=27,type="value",valuetype="number"},
+      RAZOR={value=28,type="value",valuetype="number"},
+      BONE={value=29,type="value",valuetype="number"},
+      BLACK_TOOTH={value=30,type="value",valuetype="number"},
+      NEEDLE={value=31,type="value",valuetype="number"},
+      BELIAL={value=32,type="value",valuetype="number"}}}
 }
 return {
   name = "Binding of Isaac: Afterbirth+ API",
   description = "Binding of Isaac: Afterbirth+ modding API",
-  
+
   onRegister = function(self)
     ide:AddAPI("lua", "bindingofisaacafterbirthplusapi", api)
     ide:AddInterpreter("bindingofisaacafterbirthplusapi", interpreter)
