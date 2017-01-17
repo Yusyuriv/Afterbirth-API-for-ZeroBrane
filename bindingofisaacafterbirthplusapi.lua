@@ -651,6 +651,12 @@ local api = {
         returns = "(EntityLaser)",
         valuetype = "EntityLaser"
       },
+      ToTear = {
+        type = "method",
+        args = "()",
+        returns = "(EntityTear)",
+        valuetype = "EntityTear"
+      },
       Friction = {
         type = "value",
         description = "loaded from entity config",
