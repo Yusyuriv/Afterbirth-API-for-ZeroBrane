@@ -215,25 +215,6 @@ local api = {
         type = "function",
         args = "(table ref)",
         returns = "()"
-      },
-      WorldToScreenDistance = {
-        type = "function",
-        args = "(Vector distance)",
-        returns = "(Vector)",
-        valuetype = "Vector"
-      },
-      WorldToRenderPosition = {
-        type = "function",
-        args = "(Vector position, boolean toRound)",
-        returns = "(Vector)",
-        valuetype = "Vector"
-      },
-      ScreenToWorldDistance = {
-        type = "function",
-        description = "reverse operation, converts render distance to in-game distance",
-        args = "(Vector renderDistance)",
-        returns = "(Vector)",
-        valuetype = "Vector"
       }
     }
   },
@@ -670,10 +651,6 @@ local api = {
         type = "value",
         valuetype = "Vector"
       },
-      Color = {
-        type = "value",
-        valuetype = "Color"
-      },
       Type = {
         type = "value",
         valuetype = "EntityType"
@@ -723,10 +700,6 @@ local api = {
         valuetype = "Vector"
       },
       SpriteRotation = {
-        type = "value",
-        valuetype = "number"
-      },
-      Size = {
         type = "value",
         valuetype = "number"
       },
@@ -984,6 +957,17 @@ local api = {
         args = "(Direction dir)",
         returns = "()"
       },
+      RecalculateOrbitOffset = {
+        type = "method",
+        args = "(integer layer, boolean add)",
+        returns = "(integer)",
+        valuetype = "number"
+      },
+      GetOrbitDistance = {
+        type = "method",
+        args = "(integer layer)",
+        returns = "()"
+      },
       MoveDelayed = {
         type = "method",
         args = "(integer numFrames)",
@@ -1053,7 +1037,16 @@ local api = {
       RoomClearCount = {
         type = "value",
         valuetype = "number"
-      }
+      },
+      IsDelayed = {
+        type = "boolean",
+        valuetype = "boolean"
+      },
+      IsFollower = {
+        type = "boolean",
+        valuetype = "boolean"
+      },
+
     }
   },
   EntityKnife = {
@@ -2625,6 +2618,102 @@ local api = {
         returns = "(float)",
         valuetype = "number"
       },
+      GetMovementInput = {
+        type = "method",
+        args = "()",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      GetShootingInput = {
+        type = "method",
+        args = "()",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      HasTimedItem = {
+        type = "method",
+        args = "()",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      InitBabySkin = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      CanTurnHead = {
+        type = "method",
+        description = "returns true if head should react to keys or false otherwise",
+        args = "()",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      CheckFamiliar = {
+        type = "method",
+        args = "(integer familiarVariant, integer targetCount, RNG rng)",
+        returns = "()"
+      },
+      UpdateCanShoot = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      GetLaserOffset = {
+        type = "method",
+        args = "(LaserOffset id, Vector direction)",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      GetTearMovementInheritance = {
+        type = "method",
+        args = "(Vector shotDirection)",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      GetCostumeNullPos = {
+        type = "method",
+        args = "(string nullFrameName, boolean headScale, Vector direction)",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      },
+      ReplaceCostumeSprite = {
+        type = "method",
+        args = "(Config::Item item, string spritePath, integer spriteId)",
+        returns = "()"
+      },
+      AddPlayerFormCostume = {
+        type = "method",
+        args = "(PlayerForm form)",
+        returns = "()"
+      },
+      ResetItemState = {
+        type = "method",
+        description = "Made this public so Room transtiions can call this to prevent lock ups.",
+        args = "()",
+        returns = "()"
+      },
+      SpawnMawOfVoid = {
+        type = "method",
+        args = "(integer timeout)",
+        returns = "(EntityLaser)",
+        valuetype = "EntityLaser"
+      },
+      AddDollarBillEffect = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      ShootRedCandle = {
+        type = "method",
+        description = "for ghost pepper item + poop and farts",
+        args = "(Vector direction)",
+        returns = "()"
+      },
+      DoZitEffect = {
+        type = "method",
+        args = "(Vector direction)",
+        returns = "()"
+      },
       TearsOffset = {
         type = "value",
         valuetype = "Vector"
@@ -2640,6 +2729,11 @@ local api = {
       SpriteScale = {
         type = "value",
         valuetype = "Vector"
+      },
+      ControllerIndex = {
+        type = "value",
+        description = "s32 GetItemStateCooldown( void ) const { return m_ItemStateCooldown; }",
+        valuetype = "number"
       },
       FireDelay = {
         type = "value",
@@ -2702,6 +2796,10 @@ local api = {
         type = "value",
         description = "Player stat - Only change this in a callback to MC_EVALUATE_CACHE. Better luck generally means better random events.",
         valuetype = "number"
+      },
+      BabySkin = {
+        type = "value",
+        valuetype = "BabySubType"
       }
     }
   },
@@ -3317,6 +3415,15 @@ local api = {
         args = "(float speed, FadeoutTarget target)",
         returns = "()"
       },
+      BossRushParTime = {
+        type = "value",
+        description = "Number of frames of game time.",
+        valuetype = "number"
+      },
+      BlueWombParTime = {
+        type = "value",
+        valuetype = "number"
+      },
       ScreenShakeOffset = {
         type = "value",
         valuetype = "Vector"
@@ -3328,6 +3435,11 @@ local api = {
       Difficulty = {
         type = "value",
         valuetype = "Difficulty"
+      },
+      TimeCounter = {
+        type = "value",
+        description = "same as FrameCounter but can be modified, mostly used for timed events (bossrush, daily, ...) and not for timestepping",
+        valuetype = "number"
       }
     }
   },
@@ -3805,6 +3917,12 @@ local api = {
         returns = "(RoomDescriptor)",
         valuetype = "RoomDescriptor"
       },
+      GetRooms = {
+        type = "method",
+        args = "()",
+        returns = "(RoomList)",
+        valuetype = "RoomList"
+      },
       GetStartingRoomIndex = {
         type = "method",
         args = "()",
@@ -4024,6 +4142,112 @@ local api = {
       LeaveDoor = {
         type = "value",
         valuetype = "number"
+      }
+    }
+  },
+  MusicManager = {
+    type = "class",
+    childs = {
+
+      Play = {
+        type = "method",
+        args = "(Music id, float volume)",
+        returns = "()"
+      },
+      Fadein = {
+        type = "method",
+        args = "(Music id, float volume)",
+        returns = "()"
+      },
+      Crossfade = {
+        type = "method",
+        args = "(Music id)",
+        returns = "()"
+      },
+      Queue = {
+        type = "method",
+        args = "(Music id)",
+        returns = "()"
+      },
+      Fadeout = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      Pause = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      Resume = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      EnableLayer = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      DisableLayer = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      IsLayerEnabled = {
+        type = "method",
+        args = "()",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      Enable = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      Disable = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      IsEnabled = {
+        type = "method",
+        args = "()",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      PitchSlide = {
+        type = "method",
+        args = "(float targetPitch)",
+        returns = "()"
+      },
+      ResetPitch = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      VolumeSlide = {
+        type = "method",
+        args = "(float targetVolume)",
+        returns = "()"
+      },
+      UpdateVolume = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      GetCurrentMusicID = {
+        type = "method",
+        args = "()",
+        returns = "(Music)",
+        valuetype = "Music"
+      },
+      GetQueuedMusicID = {
+        type = "method",
+        description = "if nothing is queued, return the current music id",
+        args = "()",
+        returns = "(Music)",
+        valuetype = "Music"
       }
     }
   },
@@ -4859,6 +5083,175 @@ local api = {
       }
     }
   },
+  RoomDescriptor = {
+    type = "class",
+    childs = {
+      GridIndex = {
+        type = "value",
+        description = "index in the level grid (always top left)",
+        valuetype = "number"
+      },
+      SafeGridIndex = {
+        type = "value",
+        description = "index in the level grid (not always top left, but is guaranteed to point to the room. this is important for LTL shapes!)",
+        valuetype = "number"
+      },
+      ListIndex = {
+        type = "value",
+        description = "index in the room list",
+        valuetype = "number"
+      },
+      Data = {
+        type = "value",
+        valuetype = "Room"
+      },
+      OverrideData = {
+        type = "value",
+        valuetype = "Room"
+      },
+      AllowedDoors = {
+        type = "value",
+        description = "Contains just on load swapped data (in cases like minibosses, or other such events)",
+        valuetype = "DoorSet"
+      },
+      DisplayFlags = {
+        type = "value",
+        description = "what is visible on minimap",
+        valuetype = "number"
+      },
+      VisitedCount = {
+        type = "value",
+        description = "how often the room has been visited",
+        valuetype = "number"
+      },
+      Clear = {
+        type = "value",
+        description = "room is clear, don't spawn enemies when visiting",
+        valuetype = "boolean"
+      },
+      ClearCount = {
+        type = "value",
+        valuetype = "number"
+      },
+      PressurePlatesTriggered = {
+        type = "value",
+        valuetype = "boolean"
+      },
+      SacrificeDone = {
+        type = "value",
+        description = "sacrifice room has payed out",
+        valuetype = "boolean"
+      },
+      ChallengeDone = {
+        type = "value",
+        description = "challenge room finished",
+        valuetype = "boolean"
+      },
+      SurpriseMiniboss = {
+        type = "value",
+        description = "load Greed/Krampus instead of the room specified by Type, Variant",
+        valuetype = "boolean"
+      },
+      HasWater = {
+        type = "value",
+        valuetype = "boolean"
+      },
+      PoopCount = {
+        type = "value",
+        valuetype = "number"
+      },
+      PitsCount = {
+        type = "value",
+        valuetype = "number"
+      },
+      AltBossMusic = {
+        type = "value",
+        valuetype = "boolean"
+      },
+      DecorationSeed = {
+        type = "value",
+        description = "used for cosmetic stuff like backdrops, room decorations, shopkeeper skins",
+        valuetype = "number"
+      },
+      SpawnSeed = {
+        type = "value",
+        description = "used to spawn entities at room load and initialize enemy drop seeds",
+        valuetype = "number"
+      },
+      AwardSeed = {
+        type = "value",
+        description = "used to spawn clear awards (normal, miniboss, boss rooms) and initialize shop items (shop, devil rooms)",
+        valuetype = "number"
+      },
+      ShopItemIdx = {
+        type = "value",
+        valuetype = "number"
+      },
+      ShopItemDiscountIdx = {
+        type = "value",
+        valuetype = "number"
+      },
+      DeliriumDistance = {
+        type = "value",
+        description = "Helper for The Void stage, holds the distance to the Delirium boss in room nr.",
+        valuetype = "number"
+      }
+    }
+  },
+  _SFXManager = {
+    type = "class",
+    childs = {
+      Play = {
+        type = "method",
+        args = "(SoundEffect id, float volume, integer frameDelay, boolean loop, float pitch)",
+        returns = "()"
+      },
+      AdjustVolume = {
+        type = "method",
+        description = "mostly useful for repeating sounds",
+        args = "(SoundEffect id, float volume)",
+        returns = "()"
+      },
+      AdjustPitch = {
+        type = "method",
+        description = "mostly useful for repeating sounds",
+        args = "(SoundEffect id, float pitch)",
+        returns = "()"
+      },
+      Stop = {
+        type = "method",
+        args = "(SoundEffect id)",
+        returns = "()"
+      },
+      StopLoopingSounds = {
+        type = "method",
+        args = "()",
+        returns = "()"
+      },
+      Preload = {
+        type = "method",
+        args = "(SoundEffect id)",
+        returns = "()"
+      },
+      IsPlaying = {
+        type = "method",
+        args = "(SoundEffect id)",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      SetAmbientSound = {
+        type = "method",
+        args = "(SoundEffect id, float volume, float pitch)",
+        returns = "()"
+      },
+      GetAmbientSoundVolume = {
+        type = "method",
+        args = "(SoundEffect id)",
+        returns = "(float)",
+        valuetype = "number"
+      }
+    }
+  },
   ShockwaveParams = {
     type = "class",
     childs = {
@@ -5431,6 +5824,84 @@ local api = {
     returns = "(Vector)",
     valuetype = "Vector"
   },
+  ScreenToWorldDistance = {
+    type = "function",
+    description = "converts render distance to in-game distance",
+    args = "(Vector renderDistance)",
+    returns = "(Vector)",
+    valuetype = "Vector"
+  },
+  SFXManager = {
+    type = "function",
+    args = "()",
+    returns = "(SFXManager)",
+    valuetype = "_SFXManager"
+  },
+  WorldToRenderPosition = {
+    type = "function",
+    args = "(Vector position, boolean toRound)",
+    returns = "(Vector)",
+    valuetype = "Vector"
+  },
+  WorldToScreenDistance = {
+    type = "function",
+    args = "(Vector distance)",
+    returns = "(Vector)",
+    valuetype = "Vector"
+  },
+  Input = {
+    type = "lib",
+    childs = {
+      IsButtonTriggered = {
+        type = "function",
+        args = "(integer button, integer controllerId)",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      IsButtonPressed = {
+        type = "function",
+        args = "(integer button, integer controllerId)",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      GetButtonValue = {
+        type = "function",
+        args = "(integer button, integer controllerId)",
+        returns = "(float)",
+        valuetype = "number"
+      },
+      IsActionTriggered = {
+        type = "function",
+        args = "(integer action, integer controllerId)",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      IsActionPressed = {
+        type = "function",
+        args = "(integer action, integer controllerId)",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      GetActionValue = {
+        type = "function",
+        args = "(integer action, integer controllerId)",
+        returns = "(float)",
+        valuetype = "number"
+      },
+      IsMouseBtnPressed = {
+        type = "function",
+        args = "(integer button)",
+        returns = "(boolean)",
+        valuetype = "boolean"
+      },
+      GetMousePosition = {
+        type = "function",
+        args = "(boolean gameCoords)",
+        returns = "(Vector)",
+        valuetype = "Vector"
+      }
+    }
+  },
 
   ModCallbacks={
     type="lib",childs={
@@ -5446,7 +5917,8 @@ local api = {
       MC_POST_PLAYER_INIT={value=9,type="value",valuetype="number",description="Callback is a method that takes (EntityPlayer). Called after the player is initialized."},
       MC_USE_PILL={value=10,type="value",valuetype="number",description="Callback is a method that takes (PillEffect). Called when a custom pill is used. When adding callback, specify a PillEffect ID to only respond to one pill effect."},
       MC_ENTITY_TAKE_DMG={value=11,type="value",valuetype="number",description="Callback is a method that takes (TookDamage : Entity, DamageAmount : number, DamageFlag : number (bit flags from DamageFlag enumeration), DamageSource : EntityRef, DamageCountdownFrames : number). Return true or nil if the entity or player should sustain the damage, otherwise false to ignore it. If the entity is an EntityPlayer, the DamageAmount is the integer number of half-hearts of damage that the player will take. Otherwise, DamageAmount is a number of hit points. Called before new damage is applied. A DAMAGE_COUNTDOWN flag means the entity will ignore any other DAMAGE_COUNTDOWN hits for the duration specified. When adding callback, specify an EntityType to respond to only damage taken by that entity type."},
-      MC_POST_CURSE_EVAL={value=12,type="value",valuetype="number",description="Callback is a method that takes (integer Curses). Curses is a bitmask containing current curses. Called after Level applied it's curses. Returns the new curse bitmask. Use Isaac.GetCurseIdByName to get a custom curse"}}},
+      MC_POST_CURSE_EVAL={value=12,type="value",valuetype="number",description="Callback is a method that takes (integer Curses). Curses is a bitmask containing current curses. Called after Level applied it's curses. Returns the new curse bitmask. Use Isaac.GetCurseIdByName to get a custom curse"},
+      MC_INPUT_ACTION={value=13,type="value",valuetype="number",description="Callback that takes (Entity, InputHook, ButtonAction). It is called when game/game entities wants to read action input. Entity can be nil if the input is read not from an entity Class. InputHook and ButtonActions are enumerations. Return nil if you don't want to overwrite the input or value otherwise. Return value can be bool if it's a Is__ hook or float if it's an Get__Value hook. Float values should be in range of 0.0 and 1.0"}}},
   EntityType={
     type="lib",childs={
       ENTITY_NULL={value=0,type="value",valuetype="number"},
@@ -6023,9 +6495,9 @@ local api = {
       DAMAGE_FAKE={value=bit32.lshift(1,21),type="value",valuetype="number"}}},
   SortingLayer={
     type="lib",childs={
-      SORTING_BACKGROUND={value=0,type="value",valuetype="number",description="Background level, behind grid entities (creep, pitfalls)"},
-      SORTING_DOOR={value=1,type="value",valuetype="number",description="Used by door Xray animation"},
-      SORTING_NORMAL={value=2,type="value",valuetype="number",description="Uses Y position to determine Z sorting"}}},
+      SORTING_BACKGROUND={value=0,type="value",valuetype="number"},
+      SORTING_DOOR={value=1,type="value",valuetype="number"},
+      SORTING_NORMAL={value=2,type="value",valuetype="number"}}},
   FamiliarVariant={
     type="lib",childs={
       FAMILIAR_NULL={value=0,type="value",valuetype="number"},
@@ -7711,7 +8183,177 @@ local api = {
       BONE={value=29,type="value",valuetype="number"},
       BLACK_TOOTH={value=30,type="value",valuetype="number"},
       NEEDLE={value=31,type="value",valuetype="number"},
-      BELIAL={value=32,type="value",valuetype="number"}}}
+      BELIAL={value=32,type="value",valuetype="number"}}},
+  ButtonAction={
+    type="lib",childs={
+      ACTION_LEFT={value=0,type="value",valuetype="number"},
+      ACTION_RIGHT={value=1,type="value",valuetype="number"},
+      ACTION_UP={value=2,type="value",valuetype="number"},
+      ACTION_DOWN={value=3,type="value",valuetype="number"},
+      ACTION_SHOOTLEFT={value=4,type="value",valuetype="number"},
+      ACTION_SHOOTRIGHT={value=5,type="value",valuetype="number"},
+      ACTION_SHOOTUP={value=6,type="value",valuetype="number"},
+      ACTION_SHOOTDOWN={value=7,type="value",valuetype="number"},
+      ACTION_BOMB={value=8,type="value",valuetype="number"},
+      ACTION_ITEM={value=9,type="value",valuetype="number"},
+      ACTION_PILLCARD={value=10,type="value",valuetype="number"},
+      ACTION_DROP={value=11,type="value",valuetype="number"},
+      ACTION_PAUSE={value=12,type="value",valuetype="number"},
+      ACTION_MAP={value=13,type="value",valuetype="number"},
+      ACTION_MENUCONFIRM={value=14,type="value",valuetype="number"},
+      ACTION_MENUBACK={value=15,type="value",valuetype="number"},
+      ACTION_RESTART={value=16,type="value",valuetype="number"},
+      ACTION_FULLSCREEN={value=17,type="value",valuetype="number"},
+      ACTION_MUTE={value=18,type="value",valuetype="number"},
+      ACTION_JOINMULTIPLAYER={value=19,type="value",valuetype="number"},
+      ACTION_MENULEFT={value=20,type="value",valuetype="number"},
+      ACTION_MENURIGHT={value=21,type="value",valuetype="number"},
+      ACTION_MENUUP={value=22,type="value",valuetype="number"},
+      ACTION_MENUDOWN={value=23,type="value",valuetype="number"},
+      ACTION_MENULT={value=24,type="value",valuetype="number"},
+      ACTION_MENURT={value=25,type="value",valuetype="number"},
+      ACTION_MENUTAB={value=26,type="value",valuetype="number"}}},
+  Keyboard={
+    type="lib",childs={
+      KEY_SPACE={value=32,type="value",valuetype="number"},
+      KEY_APOSTROPHE={value=39,type="value",valuetype="number"},
+      KEY_COMMA={value=44,type="value",valuetype="number"},
+      KEY_MINUS={value=45,type="value",valuetype="number"},
+      KEY_PERIOD={value=46,type="value",valuetype="number"},
+      KEY_SLASH={value=47,type="value",valuetype="number"},
+      KEY_0={value=48,type="value",valuetype="number"},
+      KEY_1={value=49,type="value",valuetype="number"},
+      KEY_2={value=50,type="value",valuetype="number"},
+      KEY_3={value=51,type="value",valuetype="number"},
+      KEY_4={value=52,type="value",valuetype="number"},
+      KEY_5={value=53,type="value",valuetype="number"},
+      KEY_6={value=54,type="value",valuetype="number"},
+      KEY_7={value=55,type="value",valuetype="number"},
+      KEY_8={value=56,type="value",valuetype="number"},
+      KEY_9={value=57,type="value",valuetype="number"},
+      KEY_SEMICOLON={value=59,type="value",valuetype="number"},
+      KEY_EQUAL={value=61,type="value",valuetype="number"},
+      KEY_A={value=65,type="value",valuetype="number"},
+      KEY_B={value=66,type="value",valuetype="number"},
+      KEY_C={value=67,type="value",valuetype="number"},
+      KEY_D={value=68,type="value",valuetype="number"},
+      KEY_E={value=69,type="value",valuetype="number"},
+      KEY_F={value=70,type="value",valuetype="number"},
+      KEY_G={value=71,type="value",valuetype="number"},
+      KEY_H={value=72,type="value",valuetype="number"},
+      KEY_I={value=73,type="value",valuetype="number"},
+      KEY_J={value=74,type="value",valuetype="number"},
+      KEY_K={value=75,type="value",valuetype="number"},
+      KEY_L={value=76,type="value",valuetype="number"},
+      KEY_M={value=77,type="value",valuetype="number"},
+      KEY_N={value=78,type="value",valuetype="number"},
+      KEY_O={value=79,type="value",valuetype="number"},
+      KEY_P={value=80,type="value",valuetype="number"},
+      KEY_Q={value=81,type="value",valuetype="number"},
+      KEY_R={value=82,type="value",valuetype="number"},
+      KEY_S={value=83,type="value",valuetype="number"},
+      KEY_T={value=84,type="value",valuetype="number"},
+      KEY_U={value=85,type="value",valuetype="number"},
+      KEY_V={value=86,type="value",valuetype="number"},
+      KEY_W={value=87,type="value",valuetype="number"},
+      KEY_X={value=88,type="value",valuetype="number"},
+      KEY_Y={value=89,type="value",valuetype="number"},
+      KEY_Z={value=90,type="value",valuetype="number"},
+      KEY_LEFT_BRACKET={value=91,type="value",valuetype="number"},
+      KEY_BACKSLASH={value=92,type="value",valuetype="number"},
+      KEY_RIGHT_BRACKET={value=93,type="value",valuetype="number"},
+      KEY_GRAVE_ACCENT={value=96,type="value",valuetype="number"},
+      KEY_WORLD_1={value=161,type="value",valuetype="number"},
+      KEY_WORLD_2={value=162,type="value",valuetype="number"},
+      KEY_ESCAPE={value=256,type="value",valuetype="number"},
+      KEY_ENTER={value=257,type="value",valuetype="number"},
+      KEY_TAB={value=258,type="value",valuetype="number"},
+      KEY_BACKSPACE={value=259,type="value",valuetype="number"},
+      KEY_INSERT={value=260,type="value",valuetype="number"},
+      KEY_DELETE={value=261,type="value",valuetype="number"},
+      KEY_RIGHT={value=262,type="value",valuetype="number"},
+      KEY_LEFT={value=263,type="value",valuetype="number"},
+      KEY_DOWN={value=264,type="value",valuetype="number"},
+      KEY_UP={value=265,type="value",valuetype="number"},
+      KEY_PAGE_UP={value=266,type="value",valuetype="number"},
+      KEY_PAGE_DOWN={value=267,type="value",valuetype="number"},
+      KEY_HOME={value=268,type="value",valuetype="number"},
+      KEY_END={value=269,type="value",valuetype="number"},
+      KEY_CAPS_LOCK={value=280,type="value",valuetype="number"},
+      KEY_SCROLL_LOCK={value=281,type="value",valuetype="number"},
+      KEY_NUM_LOCK={value=282,type="value",valuetype="number"},
+      KEY_PRINT_SCREEN={value=283,type="value",valuetype="number"},
+      KEY_PAUSE={value=284,type="value",valuetype="number"},
+      KEY_F1={value=290,type="value",valuetype="number"},
+      KEY_F2={value=291,type="value",valuetype="number"},
+      KEY_F3={value=292,type="value",valuetype="number"},
+      KEY_F4={value=293,type="value",valuetype="number"},
+      KEY_F5={value=294,type="value",valuetype="number"},
+      KEY_F6={value=295,type="value",valuetype="number"},
+      KEY_F7={value=296,type="value",valuetype="number"},
+      KEY_F8={value=297,type="value",valuetype="number"},
+      KEY_F9={value=298,type="value",valuetype="number"},
+      KEY_F10={value=299,type="value",valuetype="number"},
+      KEY_F11={value=300,type="value",valuetype="number"},
+      KEY_F12={value=301,type="value",valuetype="number"},
+      KEY_F13={value=302,type="value",valuetype="number"},
+      KEY_F14={value=303,type="value",valuetype="number"},
+      KEY_F15={value=304,type="value",valuetype="number"},
+      KEY_F16={value=305,type="value",valuetype="number"},
+      KEY_F17={value=306,type="value",valuetype="number"},
+      KEY_F18={value=307,type="value",valuetype="number"},
+      KEY_F19={value=308,type="value",valuetype="number"},
+      KEY_F20={value=309,type="value",valuetype="number"},
+      KEY_F21={value=310,type="value",valuetype="number"},
+      KEY_F22={value=311,type="value",valuetype="number"},
+      KEY_F23={value=312,type="value",valuetype="number"},
+      KEY_F24={value=313,type="value",valuetype="number"},
+      KEY_F25={value=314,type="value",valuetype="number"},
+      KEY_KP_0={value=320,type="value",valuetype="number"},
+      KEY_KP_1={value=321,type="value",valuetype="number"},
+      KEY_KP_2={value=322,type="value",valuetype="number"},
+      KEY_KP_3={value=323,type="value",valuetype="number"},
+      KEY_KP_4={value=324,type="value",valuetype="number"},
+      KEY_KP_5={value=325,type="value",valuetype="number"},
+      KEY_KP_6={value=326,type="value",valuetype="number"},
+      KEY_KP_7={value=327,type="value",valuetype="number"},
+      KEY_KP_8={value=328,type="value",valuetype="number"},
+      KEY_KP_9={value=329,type="value",valuetype="number"},
+      KEY_KP_DECIMAL={value=330,type="value",valuetype="number"},
+      KEY_KP_DIVIDE={value=331,type="value",valuetype="number"},
+      KEY_KP_MULTIPLY={value=332,type="value",valuetype="number"},
+      KEY_KP_SUBTRACT={value=333,type="value",valuetype="number"},
+      KEY_KP_ADD={value=334,type="value",valuetype="number"},
+      KEY_KP_ENTER={value=335,type="value",valuetype="number"},
+      KEY_KP_EQUAL={value=336,type="value",valuetype="number"},
+      KEY_LEFT_SHIFT={value=340,type="value",valuetype="number"},
+      KEY_LEFT_CONTROL={value=341,type="value",valuetype="number"},
+      KEY_LEFT_ALT={value=342,type="value",valuetype="number"},
+      KEY_LEFT_SUPER={value=343,type="value",valuetype="number"},
+      KEY_RIGHT_SHIFT={value=344,type="value",valuetype="number"},
+      KEY_RIGHT_CONTROL={value=345,type="value",valuetype="number"},
+      KEY_RIGHT_ALT={value=346,type="value",valuetype="number"},
+      KEY_RIGHT_SUPER={value=347,type="value",valuetype="number"},
+      KEY_MENU={value=348,type="value",valuetype="number"}}},
+  Mouse={
+    type="lib",childs={
+      MOUSE_BUTTON_1={value=0,type="value",valuetype="number"},
+      MOUSE_BUTTON_2={value=1,type="value",valuetype="number"},
+      MOUSE_BUTTON_3={value=2,type="value",valuetype="number"},
+      MOUSE_BUTTON_4={value=3,type="value",valuetype="number"},
+      MOUSE_BUTTON_5={value=4,type="value",valuetype="number"},
+      MOUSE_BUTTON_6={value=5,type="value",valuetype="number"},
+      MOUSE_BUTTON_7={value=6,type="value",valuetype="number"},
+      MOUSE_BUTTON_8={value=7,type="value",valuetype="number"},
+      MOUSE_BUTTON_LAST={value=7,type="value",valuetype="number"},
+      MOUSE_BUTTON_LEFT={value=0,type="value",valuetype="number"},
+      MOUSE_BUTTON_RIGHT={value=1,type="value",valuetype="number"},
+      MOUSE_BUTTON_MIDDLE={value=2,type="value",valuetype="number"}}},
+  InputHook={
+    type="lib",childs={
+      IS_ACTION_PRESSED={value=0,type="value",valuetype="number"},
+      IS_ACTION_TRIGGERED={value=1,type="value",valuetype="number"},
+      GET_ACTION_VALUE={value=2,type="value",valuetype="number"}}}
 }
 return {
   name = "Binding of Isaac: Afterbirth+ API",
